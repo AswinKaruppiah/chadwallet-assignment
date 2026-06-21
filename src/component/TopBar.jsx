@@ -61,23 +61,23 @@ export default function TopBar() {
   }, [authenticated]);
 
 
-  // // Programmatically create Solana wallet if the user doesn't have one
-  // useEffect(() => {
-  //   if (ready && authenticated && user && !walletCreationAttempted.current) {
-  //     const hasSolanaWallet = user.wallet?.chainType === 'solana';
-  //     if (!hasSolanaWallet) {
-  //       walletCreationAttempted.current = true;
-  //       (async () => {
-  //         try {
-  //           await createWallet();
-  //         } catch (err) {
-  //           console.error("Error creating Solana wallet programmatically:", err);
-  //           walletCreationAttempted.current = false;
-  //         }
-  //       })();
-  //     }
-  //   }
-  // }, [ready, authenticated, user, createWallet]);
+  // Programmatically create Solana wallet if the user doesn't have one
+  useEffect(() => {
+    if (ready && authenticated && user && !walletCreationAttempted.current) {
+      const hasSolanaWallet = user.wallet?.chainType === 'solana';
+      if (!hasSolanaWallet) {
+        walletCreationAttempted.current = true;
+        (async () => {
+          try {
+            await createWallet();
+          } catch (err) {
+            console.error("Error creating Solana wallet programmatically:", err);
+            walletCreationAttempted.current = false;
+          }
+        })();
+      }
+    }
+  }, [ready, authenticated, user, createWallet]);
 
   const name = user?.google?.name ||
     user?.apple?.name ||
