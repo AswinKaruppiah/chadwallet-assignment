@@ -49,7 +49,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative flex flex-col justify-center section-block py-20 px-10 max-w-7xl mx-auto"
+      className="relative flex flex-col justify-center section-block"
     >
       {/* Header */}
       <div className="mb-16 text-left">
