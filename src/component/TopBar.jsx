@@ -19,6 +19,7 @@ export default function TopBar() {
   const [mounted, setMounted] = useState(false);
   const [isProcessingOAuth, setIsProcessingOAuth] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isCreatingWallet, setIsCreatingWallet] = useState(false);
   const dropdownRef = useRef(null);
   const walletCreationAttempted = useRef(false);
 
@@ -193,6 +194,35 @@ export default function TopBar() {
                     </div>
                   </div>
                 </Show.If>
+                <Show.Else>
+                  <button
+                    onClick={async () => {
+                      try {
+                        setIsCreatingWallet(true);
+                        await createWallet();
+                      } catch (err) {
+                        console.error("Error creating wallet manually:", err);
+                      } finally {
+                        setIsCreatingWallet(false);
+                      }
+                    }}
+                    disabled={isCreatingWallet}
+                    className="w-full bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold py-2.5 rounded-xl border border-orange-500/15 hover:border-orange-500/30 transition-all text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Show>
+                      <Show.If isTrue={isCreatingWallet}>
+                        <div className="w-3.5 h-3.5 border-2 border-orange-400/20 border-t-orange-400 rounded-full animate-spin shrink-0" />
+                        <span>Creating wallet...</span>
+                      </Show.If>
+                      <Show.Else>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Create Solana Wallet</span>
+                      </Show.Else>
+                    </Show>
+                  </button>
+                </Show.Else>
               </Show>
 
               {/* Actions */}
