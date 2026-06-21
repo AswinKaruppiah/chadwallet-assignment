@@ -145,9 +145,9 @@ export default function TopBar() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-2.5 pr-4 py-1.5 text-white font-semibold text-sm transition-all"
+                  className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-1 pr-4 py-1 text-white font-semibold text-sm transition-all"
                 >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center shadow-md shrink-0">
+                  <div className="aspect-square w-8 shrink-0 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center">
                     {String(name || "T").charAt(0).toUpperCase()}
                   </div>
                   <span className="max-w-[100px] truncate">{name}</span>
