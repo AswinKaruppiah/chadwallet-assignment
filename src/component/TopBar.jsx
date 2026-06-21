@@ -17,6 +17,7 @@ export default function TopBar() {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isProcessingOAuth, setIsProcessingOAuth] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -214,13 +215,29 @@ export default function TopBar() {
 
               {/* Actions */}
               <button
-                onClick={() => {
-                  setShowDropdown(false);
-                  logout();
+                onClick={async () => {
+                  try {
+                    setIsLoggingOut(true);
+                    await logout();
+                    setShowDropdown(false);
+                  } catch (err) {
+                    console.error("Error logging out:", err);
+                  } finally {
+                    setIsLoggingOut(false);
+                  }
                 }}
-                className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold py-2.5 rounded-xl border border-red-500/15 hover:border-red-500/30 transition-all text-sm mt-1"
+                disabled={isLoggingOut}
+                className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold py-2.5 rounded-xl border border-red-500/15 hover:border-red-500/30 transition-all text-sm mt-1 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Logout
+                <Show>
+                  <Show.If isTrue={isLoggingOut}>
+                    <div className="w-3.5 h-3.5 border-2 border-red-400/20 border-t-red-400 rounded-full animate-spin shrink-0" />
+                    <span>Logging out...</span>
+                  </Show.If>
+                  <Show.Else>
+                    Logout
+                  </Show.Else>
+                </Show>
               </button>
             </motion.div>
           )}
