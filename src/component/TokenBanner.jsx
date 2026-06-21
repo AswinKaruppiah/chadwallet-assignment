@@ -28,8 +28,16 @@ function TokenCard({ token, onClick, onHover }) {
   return (
     <button
       onClick={() => onClick?.(token)}
-      onMouseEnter={() => onHover?.(true)}
-      onMouseLeave={() => onHover?.(false)}
+      onMouseEnter={() => {
+        if (window.matchMedia('(pointer: coarse)').matches) return;
+        onHover?.(true);
+      }}
+      onMouseLeave={() => {
+        if (window.matchMedia('(pointer: coarse)').matches) return;
+        onHover?.(false);
+      }}
+      onTouchStart={() => onHover?.(true)}
+      onTouchEnd={() => onHover?.(false)}
       className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full pl-1 py-1 pr-4 transition-all duration-200 cursor-pointer shrink-0"
     >
       <Image

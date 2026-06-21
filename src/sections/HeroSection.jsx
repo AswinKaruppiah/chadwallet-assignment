@@ -40,8 +40,16 @@ export default function HeroSection() {
         </p>
 
         <button
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() => {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+            setHovered(true);
+          }}
+          onMouseLeave={() => {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+            setHovered(false);
+          }}
+          onTouchStart={() => setHovered(true)}
+          onTouchEnd={() => setHovered(false)}
           className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-300/30 border border-white/10 backdrop-blur-lg transition-all"
         >
           <motion.span
