@@ -52,23 +52,23 @@ export default function FeaturesSection() {
       className="relative flex flex-col justify-center section-block"
     >
       {/* Header */}
-      <div className="mb-16 text-left">
-        <h2 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-white lowercase">
+      <div className="mb-10 md:mb-16 text-left">
+        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white lowercase">
           never miss out again
         </h2>
-        <p className="text-xl md:text-2xl text-white/40 tracking-tight lowercase mt-2">
+        <p className="text-lg md:text-2xl text-white/40 tracking-tight lowercase mt-2">
           the only social-first trading app
         </p>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {features.map((feature, i) => (
           <div
             key={i}
-            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-[32px] min-h-[500px] overflow-hidden group hover:border-white/10 transition-all duration-300 shadow-2xl"
+            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-[32px] min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 transition-all duration-300 shadow-2xl"
           >
-            <div className="p-8 pb-0">
+            <div className="p-6 md:p-8 pb-0">
               <span className="text-xs font-bold tracking-widest text-blue-500 uppercase">
                 {feature.category}
               </span>
@@ -81,7 +81,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Mobile Device Mockup / Image container */}
-            <div className="relative w-full flex-1 min-h-[280px] mt-auto">
+            <div className="relative w-full flex-1 min-h-[190px] md:min-h-[280px] mt-auto">
               <Image
                 src={feature.imagePath}
                 alt={feature.alt}

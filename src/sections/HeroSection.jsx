@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
 import { ArrowRightIcon } from "@/utility/icons";
+import StoreBadges from "@/component/StoreBadges";
 
 export default function HeroSection() {
   const [hovered, setHovered] = useState(false);
@@ -12,7 +13,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen text-white px-10 overflow-hidden"
+      className="relative min-h-screen text-white px-6 md:px-10 overflow-hidden"
     >
       {/* Background Image */}
       <Image
@@ -28,13 +29,13 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
-        <h1 className="text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
+        <h1 className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
           Chadwallet
         </h1>
-        <p className="text-4xl font-medium tracking-tighter lowercase text-white">
+        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
           where traders become legends.
         </p>
-        <p className="text-base md:text-lg text-white/60 font-medium lowercase">
+        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase">
           from memecoins to viral tokens, trade any crypto in seconds.
         </p>
 
@@ -65,6 +66,7 @@ export default function HeroSection() {
             )}
           </AnimatePresence>
         </button>
+        <StoreBadges className="flex md:hidden mt-8 gap-3" />
       </div>
     </section>
   );

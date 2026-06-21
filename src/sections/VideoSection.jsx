@@ -10,7 +10,7 @@ export default function VideoSection() {
       </p>
 
       {/* Heading */}
-      <h2 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-white text-center mb-16">
+      <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white text-center mb-10 md:mb-16">
         Trade Like a Chad.
       </h2>
 
@@ -18,7 +18,7 @@ export default function VideoSection() {
       <div className="relative w-full max-w-5xl">
 
         {/* Wide ambient glow — orange */}
-        <div className="absolute -inset-7 bg-orange-500/20 blur-[80px] rounded-full z-0" />
+        <div className="absolute inset-0 md:-inset-7 bg-orange-500/20 blur-[60px] md:blur-[80px] rounded-full z-0" />
 
         {/* Tight glow — brighter orange directly behind screen */}
         <div className="absolute inset-4 bg-orange-400/30 blur-md rounded-2xl z-0" />

@@ -6,7 +6,7 @@ export default function DownloadSection() {
   return (
     <section className="section-block !pb-14 !max-w-7xl mx-auto">
       {/* Outer Banner Card */}
-      <div className="relative overflow-hidden rounded-[32px] bg-black py-28 px-6 flex flex-col items-center justify-center text-center">
+      <div className="relative overflow-hidden rounded-[32px] bg-black py-16 md:py-28 px-3 sm:px-6 flex flex-col items-center justify-center text-center">
 
         {/* Dot pattern background */}
         <div
@@ -24,7 +24,7 @@ export default function DownloadSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_70%)] pointer-events-none" />
 
         {/* Brand App Icon Container */}
-        <div className="relative z-10 mb-10">
+        <div className="relative z-10 mb-6 md:mb-10">
           <Image
             src="/assets/logo/light.png"
             alt="ChadWallet Logo"
@@ -35,7 +35,7 @@ export default function DownloadSection() {
         </div>
 
         {/* Card Title */}
-        <h2 className="relative z-10 text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-8">
+        <h2 className="relative z-10 text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6 md:mb-8">
           Download ChadWallet
         </h2>
 
