@@ -12,5 +12,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
-// Cache bust to force reload: 1
 
