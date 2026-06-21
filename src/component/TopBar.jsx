@@ -16,10 +16,17 @@ export default function TopBar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isProcessingOAuth, setIsProcessingOAuth] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.has('privy_oauth_code')) {
+        setIsProcessingOAuth(true);
+      }
+    }
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         // Guard: If clicked element is unmounted during state changes (like the copy button),
@@ -43,6 +50,12 @@ export default function TopBar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (authenticated) {
+      setIsProcessingOAuth(false);
+    }
+  }, [authenticated]);
 
   // Programmatically create Solana wallet if the user doesn't have one
   useEffect(() => {
@@ -110,7 +123,16 @@ export default function TopBar() {
         {/* Login / Profile Button */}
         {mounted && (
           <Show>
-            <Show.If isTrue={ready && authenticated}>
+            <Show.If isTrue={isProcessingOAuth && !authenticated}>
+              <button
+                disabled
+                className="flex items-center gap-2.5 backdrop-blur-lg bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-white/60 font-semibold text-sm cursor-wait transition-all"
+              >
+                <div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin shrink-0" />
+                <span>Logging in...</span>
+              </button>
+            </Show.If>
+            <Show.ElseIf isTrue={ready && authenticated}>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowDropdown(!showDropdown)}
@@ -125,7 +147,7 @@ export default function TopBar() {
                   </svg>
                 </button>
               </div>
-            </Show.If>
+            </Show.ElseIf>
             <Show.ElseIf isTrue={ready && !authenticated}>
               <button
                 onClick={() => setShowLoginModal(true)}
