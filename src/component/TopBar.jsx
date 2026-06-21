@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePrivy, useCreateWallet } from "@privy-io/react-auth";
+import { usePrivy } from "@privy-io/react-auth";
+import { useCreateWallet } from "@privy-io/react-auth/solana";
 import { AppleIcon, GooglePlayIcon } from "@/utility/icons";
 import { truncateAddress } from "@/utility/helpers";
 import LoginModal from "@/component/LoginModal";
@@ -19,6 +20,7 @@ export default function TopBar() {
   const [isProcessingOAuth, setIsProcessingOAuth] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef(null);
+  const walletCreationAttempted = useRef(false);
 
   useEffect(() => {
     setMounted(true);
@@ -58,18 +60,24 @@ export default function TopBar() {
     }
   }, [authenticated]);
 
-  // Programmatically create Solana wallet if the user doesn't have one
-  useEffect(() => {
-    if (ready && authenticated && user) {
-      const hasSolanaWallet = user.wallets?.some(w => w.chainType === 'solana');
-      if (!hasSolanaWallet) {
-        console.log("No Solana wallet found. Creating one programmatically...");
-        createWallet().catch(err => {
-          console.error("Error creating Solana wallet programmatically:", err);
-        });
-      }
-    }
-  }, [ready, authenticated, user, createWallet]);
+
+  // // Programmatically create Solana wallet if the user doesn't have one
+  // useEffect(() => {
+  //   if (ready && authenticated && user && !walletCreationAttempted.current) {
+  //     const hasSolanaWallet = user.wallet?.chainType === 'solana';
+  //     if (!hasSolanaWallet) {
+  //       walletCreationAttempted.current = true;
+  //       (async () => {
+  //         try {
+  //           await createWallet();
+  //         } catch (err) {
+  //           console.error("Error creating Solana wallet programmatically:", err);
+  //           walletCreationAttempted.current = false;
+  //         }
+  //       })();
+  //     }
+  //   }
+  // }, [ready, authenticated, user, createWallet]);
 
   const name = user?.google?.name ||
     user?.apple?.name ||

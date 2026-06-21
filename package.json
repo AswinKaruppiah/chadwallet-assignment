@@ -13,6 +13,7 @@
     "@farcaster/miniapp-sdk": "^0.3.0",
     "@privy-io/react-auth": "^3.32.1",
     "@solana-program/memo": "^0.11.2",
+    "@solana/kit": "^6.10.0",
     "@solana/wallet-adapter-react": "^0.15.39",
     "@stripe/crypto": "^1.1.0",
     "@stripe/stripe-js": "^9.8.0",

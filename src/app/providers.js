@@ -16,8 +16,10 @@ export default function Providers({ children }) {
           logo: '/assets/logo/light.png',
         },
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
+          createOnLogin: 'off',
+
         },
+
       }}
     >
       {children}
