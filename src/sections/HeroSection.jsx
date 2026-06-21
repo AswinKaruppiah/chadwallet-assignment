@@ -33,10 +33,10 @@ export default function HeroSection() {
           Chadwallet
         </h1>
         <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
-          where traders become legends.
+          the #1 memecoin trading app.
         </p>
-        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase">
-          from memecoins to viral tokens, trade any crypto in seconds.
+        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
+          social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
         </p>
 
         <button
