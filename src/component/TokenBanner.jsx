@@ -30,7 +30,7 @@ function TokenCard({ token, onClick, onHover }) {
       onClick={() => onClick?.(token)}
       onMouseEnter={() => onHover?.(true)}
       onMouseLeave={() => onHover?.(false)}
-      className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full pl-1 pr-4 transition-all duration-200 cursor-pointer shrink-0"
+      className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full pl-1 py-1 pr-4 transition-all duration-200 cursor-pointer shrink-0"
     >
       <Image
         src={token.image}
