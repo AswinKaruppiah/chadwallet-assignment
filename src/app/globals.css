@@ -28,3 +28,13 @@ body {
   @apply py-24 px-10 max-w-screen-2xl mx-auto w-full;
 }
 
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+

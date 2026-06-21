@@ -4,7 +4,7 @@ import { AppleIcon, GooglePlayIcon } from "@/utility/icons";
 
 export default function DownloadSection() {
   return (
-    <section className="section-block !max-w-7xl mx-auto">
+    <section className="section-block !pb-14 !max-w-7xl mx-auto">
       {/* Outer Banner Card */}
       <div className="relative overflow-hidden rounded-[32px] bg-black py-28 px-6 flex flex-col items-center justify-center text-center">
 
