@@ -1,9 +1,7 @@
-"use client";
-
 import HeroSection from "@/sections/HeroSection";
 import VideoSection from "@/sections/VideoSection";
 import FeaturesSection from "@/sections/FeaturesSection";
-import FooterSection from "@/sections/FooterSection";
+import Footer from "@/component/Footer";
 
 export default function Home() {
   return (
@@ -11,7 +9,7 @@ export default function Home() {
       <HeroSection />
       <VideoSection />
       <FeaturesSection />
-      <FooterSection />
+      <Footer />
     </main>
   );
 }

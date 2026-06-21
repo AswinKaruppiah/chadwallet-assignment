@@ -27,7 +27,7 @@ export default function HeroSection() {
       <TopBar />
 
       {/* Content */}
-      <div className="relative z-20 h-full flex flex-col justify-center items-center pt-20 text-center gap-2">
+      <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
         <h1 className="text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
           chadwallet
         </h1>
@@ -41,7 +41,7 @@ export default function HeroSection() {
         <button
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-lg bg-orange-300/30 border border-white/10 backdrop-blur-lg transition-all"
+          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-300/30 border border-white/10 backdrop-blur-lg transition-all"
         >
           <motion.span
             animate={{ x: hovered ? -10 : 0 }}

@@ -1,5 +1,5 @@
 
-export default function FooterSection() {
+export default function Footer() {
   return (
     <footer className="w-full border-t rounded-t-3xl border-white/5 py-16 px-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
