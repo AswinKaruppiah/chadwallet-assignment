@@ -9,10 +9,14 @@ export default function Providers({ children }) {
     <PrivyProvider
       appId={appId}
       config={{
-        loginMethods: ['google', 'apple'],
+        loginMethods: ['email', 'google'],
         appearance: {
-          theme: 'dark',
+          accentColor: "#6A6FF5",
+          theme: "#222224",
           logo: '/assets/logo/light.png',
+        },
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
         },
       }}
     >

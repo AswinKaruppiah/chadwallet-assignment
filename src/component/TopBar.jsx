@@ -131,35 +131,44 @@ export default function TopBar() {
               <div className="flex flex-col gap-1 border-b border-white/5 pb-3">
                 <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Account</span>
                 <span className="text-white font-extrabold text-base leading-tight truncate">{name}</span>
-                {email && <span className="text-white/60 text-xs truncate">{email}</span>}
+                <Show>
+                  <Show.If isTrue={!!email}>
+                    <span className="text-white/60 text-xs truncate">{email}</span>
+                  </Show.If>
+                </Show>
               </div>
 
               {/* Wallet Section */}
-              {walletAddress && (
-                <div className="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
-                  <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Solana Wallet</span>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-white font-mono text-xs font-semibold">{truncateAddress(walletAddress)}</span>
-                    <button
-                      onClick={() => {
-                        navigator.clipboard.writeText(walletAddress);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                      }}
-                      className="text-white/40 hover:text-white transition-colors text-xs flex items-center gap-1.5 shrink-0"
-                      title="Copy address"
-                    >
-                      {copied ? (
-                        <span className="text-orange-400 font-bold text-[10px] uppercase">Copied!</span>
-                      ) : (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                        </svg>
-                      )}
-                    </button>
+              <Show>
+                <Show.If isTrue={!!walletAddress}>
+                  <div className="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
+                    <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Solana Wallet</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-white font-mono text-xs font-semibold">{truncateAddress(walletAddress)}</span>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(walletAddress);
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="text-white/40 hover:text-white transition-colors text-xs flex items-center gap-1.5 shrink-0"
+                        title="Copy address"
+                      >
+                        <Show>
+                          <Show.If isTrue={copied}>
+                            <span className="text-orange-400 font-bold text-[10px] uppercase">Copied!</span>
+                          </Show.If>
+                          <Show.Else>
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                          </Show.Else>
+                        </Show>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
+                </Show.If>
+              </Show>
 
               {/* Actions */}
               <button
