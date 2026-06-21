@@ -13,3 +13,18 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   overflow-x: hidden;
 }
+
+/* Hide scrollbar — all browsers */
+* {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+}
+*::-webkit-scrollbar {
+  display: none;                /* Chrome / Safari / Opera */
+}
+
+/* Custom styles for the video mockup container */
+.section-block {
+  @apply py-24 px-10 max-w-screen-2xl mx-auto w-full;
+}
+
