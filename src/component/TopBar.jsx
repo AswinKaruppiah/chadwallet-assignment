@@ -1,41 +1,52 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePrivy } from "@privy-io/react-auth";
 import { AppleIcon, GooglePlayIcon } from "@/utility/icons";
+import { truncateAddress } from "@/utility/helpers";
+import Show from "@/component/Show";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function TopBar() {
   const { login, logout, authenticated, user, ready } = usePrivy();
-  const router = useRouter();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const dropdownRef = useRef(null);
 
-  console.log(user);
-
-
-  // Automatically clear redirect login parameters and refresh the page to update the UI
   useEffect(() => {
-    if (ready && authenticated) {
-      if (typeof window !== "undefined" && window.location.search.includes("privy")) {
-        // Clear the OAuth params from the URL bar without reloading
-        window.history.replaceState({}, document.title, window.location.pathname);
-        router.refresh();
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        // Guard: If clicked element is unmounted during state changes (like the copy button),
+        // it won't be in the document body. In this case, we shouldn't close the dropdown.
+        if (event.target && !document.body.contains(event.target)) {
+          return;
+        }
+        setShowDropdown(false);
       }
     }
-  }, [ready, authenticated, router]);
 
-  // Helper to format the wallet address or email for the profile button
-  const getIdentifier = () => {
-    if (!user) return "";
-    if (user.google?.email) return user.google.email;
-    if (user.apple?.email) return user.apple.email;
-    if (user.wallet?.address) {
-      const addr = user.wallet.address;
-      return `${addr.slice(0, 4)}...${addr.slice(-4)}`;
+    function handleScroll() {
+      setShowDropdown(false);
     }
-    if (user.email?.address) return user.email.address;
-    return "profile";
-  };
+
+    document.addEventListener("pointerdown", handleClickOutside, { capture: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside, { capture: true });
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const name = user?.google?.name ||
+    user?.apple?.name ||
+    user?.email?.address?.split('@')[0] ||
+    user?.google?.email?.split('@')[0] ||
+    user?.apple?.email?.split('@')[0] ||
+    "Trader";
+  const email = user?.email?.address || user?.google?.email || user?.apple?.email || "";
+  const walletAddress = user?.wallet?.address;
 
   return (
     <div className="relative z-30 flex items-center justify-between py-4">
@@ -48,7 +59,7 @@ export default function TopBar() {
       </Link>
 
       {/* Right — Store Badges + Login */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 relative" ref={dropdownRef}>
 
         {/* App Store Badge */}
         <Link
@@ -78,29 +89,91 @@ export default function TopBar() {
           </div>
         </Link>
 
-        {/* Login/Logout Button */}
-        {ready && (
-          authenticated ? (
+        {/* Login / Profile Button */}
+        <Show>
+          <Show.If isTrue={ready && authenticated}>
             <div className="flex items-center gap-2">
-              <span className="hidden md:inline text-xs text-white/50 bg-white/5 px-3 py-2 rounded-lg border border-white/5">
-                {getIdentifier()}
-              </span>
               <button
-                onClick={logout}
-                className="bg-white/10 text-white text-sm font-bold px-5 py-2 rounded-lg hover:bg-white/20 border border-white/10 transition-all"
+                onClick={() => setShowDropdown(!showDropdown)}
+                className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-2.5 pr-4 py-1.5 text-white font-semibold text-sm transition-all"
               >
-                Logout
+                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center shadow-md shrink-0">
+                  {String(name || "T").charAt(0).toUpperCase()}
+                </div>
+                <span className="max-w-[100px] truncate">{name}</span>
+                <svg className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
             </div>
-          ) : (
+          </Show.If>
+          <Show.If isTrue={ready && !authenticated}>
             <button
               onClick={login}
               className="bg-white text-black text-sm font-bold px-5 py-2 rounded-full hover:bg-white/90 transition-all"
             >
               Login
             </button>
-          )
-        )}
+          </Show.If>
+        </Show>
+
+        {/* Profile Dropdown Menu */}
+        <AnimatePresence>
+          {showDropdown && authenticated && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className="absolute right-0 top-[110%] w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-5 shadow-2xl backdrop-blur-xl z-50 flex flex-col gap-4"
+            >
+              {/* Header / User Info */}
+              <div className="flex flex-col gap-1 border-b border-white/5 pb-3">
+                <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Account</span>
+                <span className="text-white font-extrabold text-base leading-tight truncate">{name}</span>
+                {email && <span className="text-white/60 text-xs truncate">{email}</span>}
+              </div>
+
+              {/* Wallet Section */}
+              {walletAddress && (
+                <div className="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
+                  <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Solana Wallet</span>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-white font-mono text-xs font-semibold">{truncateAddress(walletAddress)}</span>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(walletAddress);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="text-white/40 hover:text-white transition-colors text-xs flex items-center gap-1.5 shrink-0"
+                      title="Copy address"
+                    >
+                      {copied ? (
+                        <span className="text-orange-400 font-bold text-[10px] uppercase">Copied!</span>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Actions */}
+              <button
+                onClick={() => {
+                  setShowDropdown(false);
+                  logout();
+                }}
+                className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold py-2.5 rounded-xl border border-red-500/15 hover:border-red-500/30 transition-all text-sm mt-1"
+              >
+                Logout
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

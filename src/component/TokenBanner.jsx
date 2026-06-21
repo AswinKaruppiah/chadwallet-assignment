@@ -6,9 +6,9 @@ import Image from "next/image";
 const MOCK_TOKENS = [
   { symbol: "SOL", name: "Solana", price: 176.42, change: 3.21, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" },
   { symbol: "BONK", name: "Bonk", price: 0.00002841, change: -2.15, image: "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I" },
-  { symbol: "WIF", name: "dogwifhat", price: 1.87, change: 5.67, image: "https://bafkreibk3covs5ltyqxa272uodhculbr6kea6betiez7oz4nqbd3qrd3jm.ipfs.nftstorage.link" },
+  { symbol: "WIF", name: "dogwifhat", price: 1.87, change: 5.67, image: "/assets/wif.png" },
   { symbol: "JUP", name: "Jupiter", price: 0.98, change: 1.43, image: "https://static.jup.ag/jup/icon.png" },
-  { symbol: "RENDER", name: "Render", price: 10.24, change: -0.89, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof/logo.png" },
+  { symbol: "RENDER", name: "Render", price: 10.24, change: -0.89, image: "/assets/render.png" },
   { symbol: "RAY", name: "Raydium", price: 3.56, change: 2.78, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/logo.png" },
   { symbol: "PYTH", name: "Pyth Network", price: 0.41, change: -1.32, image: "https://pyth.network/token.svg" },
   { symbol: "ORCA", name: "Orca", price: 4.12, change: 0.56, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE/logo.png" },
@@ -19,7 +19,7 @@ const MOCK_TOKENS = [
 function formatPrice(price) {
   if (price < 0.001) return `$${price.toFixed(8)}`;
   if (price < 1) return `$${price.toFixed(4)}`;
-  return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function TokenCard({ token, onClick, onHover }) {
