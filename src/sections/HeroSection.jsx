@@ -29,7 +29,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
         <h1 className="text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
-          chadwallet
+          Chadwallet
         </h1>
         <p className="text-4xl font-medium tracking-tighter lowercase text-white">
           where traders become legends.
