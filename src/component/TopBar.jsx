@@ -2,19 +2,24 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useCreateWallet } from "@privy-io/react-auth";
 import { AppleIcon, GooglePlayIcon } from "@/utility/icons";
 import { truncateAddress } from "@/utility/helpers";
+import LoginModal from "@/component/LoginModal";
 import Show from "@/component/Show";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function TopBar() {
-  const { login, logout, authenticated, user, ready } = usePrivy();
+  const { logout, authenticated, user, ready } = usePrivy();
+  const { createWallet } = useCreateWallet();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
+    setMounted(true);
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         // Guard: If clicked element is unmounted during state changes (like the copy button),
@@ -39,6 +44,19 @@ export default function TopBar() {
     };
   }, []);
 
+  // Programmatically create Solana wallet if the user doesn't have one
+  useEffect(() => {
+    if (ready && authenticated && user) {
+      const hasSolanaWallet = user.wallets?.some(w => w.chainType === 'solana');
+      if (!hasSolanaWallet) {
+        console.log("No Solana wallet found. Creating one programmatically...");
+        createWallet().catch(err => {
+          console.error("Error creating Solana wallet programmatically:", err);
+        });
+      }
+    }
+  }, [ready, authenticated, user, createWallet]);
+
   const name = user?.google?.name ||
     user?.apple?.name ||
     user?.email?.address?.split('@')[0] ||
@@ -46,7 +64,7 @@ export default function TopBar() {
     user?.apple?.email?.split('@')[0] ||
     "Trader";
   const email = user?.email?.address || user?.google?.email || user?.apple?.email || "";
-  const walletAddress = user?.wallet?.address;
+  const walletAddress = user?.wallets?.find(w => w.chainType === 'solana')?.address || user?.wallet?.address;
 
   return (
     <div className="relative z-30 flex items-center justify-between py-4">
@@ -90,32 +108,34 @@ export default function TopBar() {
         </Link>
 
         {/* Login / Profile Button */}
-        <Show>
-          <Show.If isTrue={ready && authenticated}>
-            <div className="flex items-center gap-2">
+        {mounted && (
+          <Show>
+            <Show.If isTrue={ready && authenticated}>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-2.5 pr-4 py-1.5 text-white font-semibold text-sm transition-all"
+                >
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center shadow-md shrink-0">
+                    {String(name || "T").charAt(0).toUpperCase()}
+                  </div>
+                  <span className="max-w-[100px] truncate">{name}</span>
+                  <svg className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            </Show.If>
+            <Show.ElseIf isTrue={ready && !authenticated}>
               <button
-                onClick={() => setShowDropdown(!showDropdown)}
-                className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-2.5 pr-4 py-1.5 text-white font-semibold text-sm transition-all"
+                onClick={() => setShowLoginModal(true)}
+                className="bg-white text-black text-sm font-bold px-5 py-2 rounded-full hover:bg-white/90 transition-all"
               >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center shadow-md shrink-0">
-                  {String(name || "T").charAt(0).toUpperCase()}
-                </div>
-                <span className="max-w-[100px] truncate">{name}</span>
-                <svg className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
+                Login
               </button>
-            </div>
-          </Show.If>
-          <Show.If isTrue={ready && !authenticated}>
-            <button
-              onClick={login}
-              className="bg-white text-black text-sm font-bold px-5 py-2 rounded-full hover:bg-white/90 transition-all"
-            >
-              Login
-            </button>
-          </Show.If>
-        </Show>
+            </Show.ElseIf>
+          </Show>
+        )}
 
         {/* Profile Dropdown Menu */}
         <AnimatePresence>
@@ -184,6 +204,8 @@ export default function TopBar() {
           )}
         </AnimatePresence>
       </div>
+
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </div>
   );
 }
