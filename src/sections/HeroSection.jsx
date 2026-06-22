@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "nextjs-toploader/app";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
+import Link from "next/link";
 import { ArrowRightIcon } from "@/utility/icons";
 import StoreBadges from "@/component/StoreBadges";
 import { animateFadeYVariants } from "@/utility/animate";
 
 export default function HeroSection() {
-  const router = useRouter();
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -42,45 +41,46 @@ export default function HeroSection() {
           social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
         </motion.p>
 
-        <motion.button
-          initial="hidden"
-          animate="visible"
-          variants={animateFadeYVariants({ delay: 0.7 })}
-          onClick={() => router.push("/trade")}
-          onMouseEnter={() => {
-            if (window.matchMedia('(pointer: coarse)').matches) return;
-            setHovered(true);
-          }}
-          onMouseLeave={() => {
-            if (window.matchMedia('(pointer: coarse)').matches) return;
-            setHovered(false);
-          }}
-          onTouchStart={() => setHovered(true)}
-          onTouchEnd={() => setHovered(false)}
-          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-400/40 border border-white/10 backdrop-blur-sm"
-        >
-          <motion.span
-            animate={{ x: hovered ? -10 : 0 }}
-            transition={{ duration: 0.1, ease: "easeInOut" }}
+        <Link href="/trade" passHref legacyBehavior>
+          <motion.a
+            initial="hidden"
+            animate="visible"
+            variants={animateFadeYVariants({ delay: 0.7 })}
+            onMouseEnter={() => {
+              if (window.matchMedia('(pointer: coarse)').matches) return;
+              setHovered(true);
+            }}
+            onMouseLeave={() => {
+              if (window.matchMedia('(pointer: coarse)').matches) return;
+              setHovered(false);
+            }}
+            onTouchStart={() => setHovered(true)}
+            onTouchEnd={() => setHovered(false)}
+            className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-400/40 border border-white/10 backdrop-blur-sm cursor-pointer"
           >
-            Start Trading
-          </motion.span>
+            <motion.span
+              animate={{ x: hovered ? -10 : 0 }}
+              transition={{ duration: 0.1, ease: "easeInOut" }}
+            >
+              Start Trading
+            </motion.span>
 
-          <AnimatePresence>
-            {hovered && (
-              <motion.span
-                key="arrow"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                transition={{ duration: 0.1, ease: "easeInOut" }}
-                className="absolute right-5"
-              >
-                <ArrowRightIcon className="w-4 h-4" />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
+            <AnimatePresence>
+              {hovered && (
+                <motion.span
+                  key="arrow"
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.1, ease: "easeInOut" }}
+                  className="absolute right-5"
+                >
+                  <ArrowRightIcon className="w-4 h-4" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.a>
+        </Link>
         <motion.div initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 1.0 })}>
           <StoreBadges className="flex md:hidden mt-8 gap-3" />
         </motion.div>
