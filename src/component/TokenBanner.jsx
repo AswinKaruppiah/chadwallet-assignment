@@ -1,20 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-
-const MOCK_TOKENS = [
-  { symbol: "SOL", name: "Solana", price: 176.42, change: 3.21, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" },
-  { symbol: "BONK", name: "Bonk", price: 0.00002841, change: -2.15, image: "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I" },
-  { symbol: "WIF", name: "dogwifhat", price: 1.87, change: 5.67, image: "/assets/wif.png" },
-  { symbol: "JUP", name: "Jupiter", price: 0.98, change: 1.43, image: "https://static.jup.ag/jup/icon.png" },
-  { symbol: "RENDER", name: "Render", price: 10.24, change: -0.89, image: "/assets/render.png" },
-  { symbol: "RAY", name: "Raydium", price: 3.56, change: 2.78, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/logo.png" },
-  { symbol: "PYTH", name: "Pyth Network", price: 0.41, change: -1.32, image: "https://pyth.network/token.svg" },
-  { symbol: "ORCA", name: "Orca", price: 4.12, change: 0.56, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE/logo.png" },
-  { symbol: "SAMO", name: "Samoyed", price: 0.012, change: 8.91, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU/logo.png" },
-  { symbol: "MANGO", name: "Mango", price: 0.057, change: -3.45, image: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac/token.png" },
-];
+import { useBirdeyeTokens } from "@/hooks/useBirdeyeTokens";
 
 function formatPrice(price) {
   if (price < 0.001) return `$${price.toFixed(8)}`;
@@ -40,12 +27,15 @@ function TokenCard({ token, onClick, onHover }) {
       onTouchEnd={() => onHover?.(false)}
       className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full pl-1 py-1 pr-4 transition-all duration-200 cursor-pointer shrink-0"
     >
-      <Image
+      <img
         src={token.image}
         alt={token.symbol}
         width={32}
         height={32}
-        className="rounded-full object-cover bg-white/10"
+        className="rounded-full object-cover bg-white/10 w-8 h-8"
+        onError={(e) => {
+          e.currentTarget.src = "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png";
+        }}
       />
       <span className="text-white font-bold text-sm">{token.symbol}</span>
       <span className="text-white/50 text-sm">{formatPrice(token.price)}</span>
@@ -58,11 +48,47 @@ function TokenCard({ token, onClick, onHover }) {
 
 export default function TokenBanner({ direction = "left", onTokenClick }) {
   const [paused, setPaused] = useState(false);
-  const tokens = direction === "left" ? MOCK_TOKENS : [...MOCK_TOKENS].reverse();
+  const { data: apiTokens, loading } = useBirdeyeTokens(20);
+
+  const mappedApiTokens = apiTokens?.map(t => ({
+    symbol: t.symbol,
+    name: t.name,
+    price: t.price || 0,
+    change: t.price_change_24h_percent || 0,
+    image: t.logo_uri || "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png"
+  })) || [];
+
+  if (loading) {
+    return (
+      <div className="relative w-full overflow-hidden min-h-14 py-2">
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+        <div className="flex gap-3 px-3">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 bg-white/5 border border-white/5 rounded-full pl-1 py-1 pr-4 shrink-0 animate-pulse"
+            >
+              <div className="w-8 h-8 rounded-full bg-white/10" />
+              <div className="w-10 h-3 rounded bg-white/10" />
+              <div className="w-14 h-3 rounded bg-white/10" />
+              <div className="w-10 h-3 rounded bg-white/10" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (mappedApiTokens.length === 0) {
+    return <div className="h-12 w-full py-2" />;
+  }
+
+  const tokens = direction === "left" ? mappedApiTokens : [...mappedApiTokens].reverse();
 
   return (
     <div
-      className="relative w-full overflow-hidden py-2"
+      className="relative w-full overflow-hidden min-h-14 py-2"
     >
       {/* Edge fades */}
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
@@ -70,7 +96,7 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
       <div
         className="flex w-max will-change-transform"
         style={{
-          animation: `marquee-${direction} 30s linear infinite`,
+          animation: `marquee-${direction} 60s linear infinite`,
           animationPlayState: paused ? "paused" : "running",
         }}
       >

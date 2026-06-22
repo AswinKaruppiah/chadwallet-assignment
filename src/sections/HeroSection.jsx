@@ -21,7 +21,7 @@ export default function HeroSection() {
         alt="Hero Background"
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover object-center pointer-events-none"
       />
 
       {/* Top Bar */}
