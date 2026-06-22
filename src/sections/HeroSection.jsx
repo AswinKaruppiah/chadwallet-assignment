@@ -13,7 +13,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen text-white px-6 md:px-10 overflow-hidden"
+      className="relative min-h-screen select-none text-white px-6 md:px-10 overflow-hidden"
     >
       {/* Background Image */}
       <Image
