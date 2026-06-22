@@ -24,7 +24,7 @@ export default function Footer() {
 
       {/* Massive Text at the Bottom */}
       <div className="w-full flex justify-center items-end px-4 md:px-8 mt-12 lg:mt-28">
-        <h1 className="text-[14vw] font-black tracking-tighter leading-[0.75] uppercase text-center w-full select-none bg-gradient-to-b from-white via-white/80 to-white/20 bg-clip-text text-transparent transform scale-y-[1.8] origin-bottom">
+        <h1 className="text-[14vw] font-black tracking-tighter leading-[0.75] uppercase text-center w-full select-none bg-gradient-to-b from-zinc-100/90 via-zinc-600 to-black bg-clip-text text-transparent transform scale-y-[1.8] origin-bottom">
           CHADWALLET
         </h1>
       </div>
