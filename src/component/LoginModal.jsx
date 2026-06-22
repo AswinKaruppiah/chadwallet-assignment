@@ -5,6 +5,7 @@ import { useLoginWithOAuth } from '@privy-io/react-auth';
 import { useCreateWallet } from '@privy-io/react-auth/solana';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppleIcon, GoogleIcon } from '@/utility/icons';
+import { getDisplayName } from '@/utility/helpers';
 import Image from "next/image";
 import toast from 'react-hot-toast';
 
@@ -20,13 +21,17 @@ export default function LoginModal({ isOpen, onClose }) {
         const toastId = toast.loading('Creating Solana wallet...');
         try {
           await createWallet();
-          toast.success('Successfully logged in!', { id: toastId });
+          if (isNewUser) {
+            toast.success(`Welcome, ${getDisplayName(user?.google?.name || user?.email?.address)}!`, { id: toastId });
+          } else {
+            toast.dismiss(toastId);
+          }
         } catch (err) {
           console.error("Error creating Solana wallet:", err);
           toast.error('Failed to create wallet', { id: toastId });
         }
-      } else {
-        toast.success('Successfully logged in!');
+      } else if (isNewUser) {
+        toast.success(`Welcome, ${getDisplayName(user?.google?.name || user?.email?.address)}!`);
       }
 
       if (onClose) onClose();
