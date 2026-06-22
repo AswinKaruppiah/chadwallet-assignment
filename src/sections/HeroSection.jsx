@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
 import { ArrowRightIcon } from "@/utility/icons";
@@ -9,6 +10,7 @@ import StoreBadges from "@/component/StoreBadges";
 import { animateFadeYVariants } from "@/utility/animate";
 
 export default function HeroSection() {
+  const router = useRouter();
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -44,6 +46,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
           variants={animateFadeYVariants({ delay: 0.7 })}
+          onClick={() => router.push("/trade")}
           onMouseEnter={() => {
             if (window.matchMedia('(pointer: coarse)').matches) return;
             setHovered(true);

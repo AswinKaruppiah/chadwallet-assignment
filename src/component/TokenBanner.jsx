@@ -1,13 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useBirdeyeTokens } from "@/hooks/useBirdeyeTokens";
-
-function formatPrice(price) {
-  if (price < 0.001) return `$${price.toFixed(8)}`;
-  if (price < 1) return `$${price.toFixed(4)}`;
-  return `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-}
+import { formatPrice } from "@/utility/helper";
+import Show from "@/component/Show";
 
 function TokenCard({ token, onClick, onHover }) {
   const isPositive = token.change >= 0;
@@ -27,18 +24,20 @@ function TokenCard({ token, onClick, onHover }) {
       onTouchEnd={() => onHover?.(false)}
       className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full pl-1 py-1 pr-4 transition-all duration-200 cursor-pointer shrink-0"
     >
-      <img
-        src={token.image}
-        alt={token.symbol}
-        width={32}
-        height={32}
-        className="rounded-full object-cover bg-white/10 w-8 h-8"
-        onError={(e) => {
-          e.currentTarget.src = "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png";
-        }}
-      />
+      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white/10 shrink-0 flex items-center justify-center">
+        <Show>
+          <Show.If isTrue={!!token.image}>
+            <Image src={token.image} alt={token.symbol} fill className="object-cover" />
+          </Show.If>
+          <Show.Else>
+            <div className="w-full h-full flex items-center justify-center font-bold text-[10px] bg-gradient-to-br from-orange-500/80 to-amber-500/80 rounded-full">
+              {token.symbol?.slice(0, 2)}
+            </div>
+          </Show.Else>
+        </Show>
+      </div>
       <span className="text-white font-bold text-sm">{token.symbol}</span>
-      <span className="text-white/50 text-sm">{formatPrice(token.price)}</span>
+      <span className="text-white/50 text-sm">${formatPrice(token.price)}</span>
       <span className={`text-xs font-semibold ${isPositive ? "text-green-400" : "text-red-400"}`}>
         {isPositive ? "+" : ""}{token.change.toFixed(2)}%
       </span>
@@ -55,7 +54,8 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
     name: t.name,
     price: t.price || 0,
     change: t.price_change_24h_percent || 0,
-    image: t.logo_uri || "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png"
+    image: t.logo_uri || "",
+    volume: t.volume_24h_usd || 0,
   })) || [];
 
   if (loading) {

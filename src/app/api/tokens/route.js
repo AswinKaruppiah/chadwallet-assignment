@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 let cache = { data: null, timestamp: 0 };
-const CACHE_TTL = 60_000; // 60 seconds
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour (3,600,000 ms)
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
