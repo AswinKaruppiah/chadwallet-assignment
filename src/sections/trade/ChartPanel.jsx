@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Show from "@/component/Show";
 import LiveTrades from "./LiveTrades";
 import TokenInfoHeader from "./TokenInfoHeader";
@@ -16,6 +16,18 @@ export default function ChartPanel({ activeToken, loading }) {
     if (upper === "USDT") return "BINANCE:USDTUSD";
     return `MEXC:${upper}USDT`;
   };
+
+  const [tvLoading, setTvLoading] = useState(true);
+  const [dexLoading, setDexLoading] = useState(true);
+
+  useEffect(() => {
+    if (activeToken) {
+      setTvLoading(true);
+      setDexLoading(true);
+    }
+  }, [activeToken?.address, activeToken?.symbol]);
+
+  const isChartLoading = chartSource === "tv" ? tvLoading : dexLoading;
 
   return (
     <div className="flex-1 flex flex-col border-r border-white/5 relative overflow-y-auto">
@@ -59,6 +71,16 @@ export default function ChartPanel({ activeToken, loading }) {
           </Show.If>
         </Show>
 
+        {/* Chart Load State Overlay */}
+        <Show>
+          <Show.If isTrue={!loading && !!activeToken && isChartLoading}>
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
+              <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
+              Loading chart...
+            </div>
+          </Show.If>
+        </Show>
+
         {/* Chart containers (always mounted to prevent layout re-creation, toggled via CSS hidden) */}
         <div className={`absolute inset-0 w-full h-full ${(!activeToken || loading) ? "hidden" : ""}`}>
           <div className={`w-full h-full ${chartSource !== "tv" ? "hidden" : ""}`}>
@@ -69,6 +91,7 @@ export default function ChartPanel({ activeToken, loading }) {
                   width="100%"
                   height="100%"
                   className="pointer-events-auto border-none w-full h-full"
+                  onLoad={() => setTvLoading(false)}
                 />
               </Show.If>
             </Show>
@@ -81,6 +104,7 @@ export default function ChartPanel({ activeToken, loading }) {
                   width="100%"
                   height="100%"
                   className="pointer-events-auto border-none w-full h-full"
+                  onLoad={() => setDexLoading(false)}
                 />
               </Show.If>
             </Show>
