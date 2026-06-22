@@ -70,7 +70,12 @@ export default function TopBar() {
   const walletAddress = user?.wallets?.find(w => w.chainType === 'solana')?.address || user?.wallet?.address;
 
   return (
-    <div className="relative z-30 flex items-center justify-between py-4">
+    <motion.div
+      initial={{ opacity: 0, y: -40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="relative z-30 flex items-center justify-between py-4"
+    >
 
       {/* Left — Logo + Brand */}
       <Link href="/">
@@ -237,6 +242,6 @@ export default function TopBar() {
       </div>
 
       <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
-    </div>
+    </motion.div>
   );
 }

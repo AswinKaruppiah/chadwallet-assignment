@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
 import { ArrowRightIcon } from "@/utility/icons";
 import StoreBadges from "@/component/StoreBadges";
+import { animateFadeYVariants } from "@/utility/animate";
 
 export default function HeroSection() {
   const [hovered, setHovered] = useState(false);
@@ -29,17 +30,20 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
-        <h1 className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
+        <motion.h1 initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.2 })} className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
           Chadwallet
-        </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
+        </motion.h1>
+        <motion.p initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.4 })} className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
           the #1 memecoin trading app.
-        </p>
-        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
+        </motion.p>
+        <motion.p initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.6 })} className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
           social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
-        </p>
+        </motion.p>
 
-        <button
+        <motion.button
+          initial="hidden"
+          animate="visible"
+          variants={animateFadeYVariants({ delay: 0.7 })}
           onMouseEnter={() => {
             if (window.matchMedia('(pointer: coarse)').matches) return;
             setHovered(true);
@@ -50,7 +54,7 @@ export default function HeroSection() {
           }}
           onTouchStart={() => setHovered(true)}
           onTouchEnd={() => setHovered(false)}
-          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-400/40 border border-white/10 backdrop-blur-sm transition-all"
+          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-400/40 border border-white/10 backdrop-blur-sm"
         >
           <motion.span
             animate={{ x: hovered ? -10 : 0 }}
@@ -73,8 +77,10 @@ export default function HeroSection() {
               </motion.span>
             )}
           </AnimatePresence>
-        </button>
-        <StoreBadges className="flex md:hidden mt-8 gap-3" />
+        </motion.button>
+        <motion.div initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 1.0 })}>
+          <StoreBadges className="flex md:hidden mt-8 gap-3" />
+        </motion.div>
       </div>
     </section>
   );
