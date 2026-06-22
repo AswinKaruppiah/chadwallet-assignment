@@ -35,9 +35,15 @@ export default function DownloadSection() {
         </div>
 
         {/* Card Title */}
-        <h2 className="relative z-10 text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6 md:mb-8">
+        <h2 className="relative z-10 text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-4 md:mb-6">
           Download ChadWallet
         </h2>
+
+        {/* Overview */}
+        <p className="relative z-10 max-w-xl mb-8 md:mb-10 text-white/60 text-xs md:text-sm leading-relaxed">
+          Trade meme coins faster with real-time insights, trending token discovery, and powerful analytics all in one place.
+          Enjoy secure deposits, instant withdrawals, and complete control of your crypto from day one.
+        </p>
 
         {/* Buttons / Badges Container */}
         <div className="relative z-10 flex flex-wrap items-center justify-center gap-4">

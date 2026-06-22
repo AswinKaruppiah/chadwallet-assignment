@@ -75,7 +75,7 @@ export default function TopBar() {
       {/* Left — Logo + Brand */}
       <Link href="/">
         <h2 className="font-black text-lg hover:opacity-80 transition-opacity cursor-pointer">
-          Chadwallet
+          ChadWallet
         </h2>
       </Link>
 
