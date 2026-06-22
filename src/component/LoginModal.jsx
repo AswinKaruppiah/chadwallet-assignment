@@ -2,13 +2,40 @@
 
 import { useState, useEffect } from 'react';
 import { useLoginWithOAuth } from '@privy-io/react-auth';
+import { useCreateWallet } from '@privy-io/react-auth/solana';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppleIcon, GoogleIcon } from '@/utility/icons';
 import Image from "next/image";
+import toast from 'react-hot-toast';
 
 export default function LoginModal({ isOpen, onClose }) {
-  const { initOAuth } = useLoginWithOAuth();
   const [error, setError] = useState('');
+  const { createWallet } = useCreateWallet();
+
+  const { initOAuth } = useLoginWithOAuth({
+    onComplete: async ({ user, isNewUser }) => {
+      const hasSolanaWallet = user?.wallet?.chainType === 'solana';
+
+      if (!hasSolanaWallet) {
+        const toastId = toast.loading('Creating Solana wallet...');
+        try {
+          await createWallet();
+          toast.success('Successfully logged in!', { id: toastId });
+        } catch (err) {
+          console.error("Error creating Solana wallet:", err);
+          toast.error('Failed to create wallet', { id: toastId });
+        }
+      } else {
+        toast.success('Successfully logged in!');
+      }
+
+      if (onClose) onClose();
+    },
+    onError: (err) => {
+      console.error('Login failed', err);
+      setError(err?.message || 'Login failed');
+    }
+  });
 
   // Reset local error when modal closes/opens
   useEffect(() => {

@@ -21,7 +21,6 @@ export default function TopBar() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isCreatingWallet, setIsCreatingWallet] = useState(false);
   const dropdownRef = useRef(null);
-  const walletCreationAttempted = useRef(false);
 
   useEffect(() => {
     setMounted(true);
@@ -60,25 +59,6 @@ export default function TopBar() {
       setIsProcessingOAuth(false);
     }
   }, [authenticated]);
-
-
-  // Programmatically create Solana wallet if the user doesn't have one
-  useEffect(() => {
-    if (ready && authenticated && user && !walletCreationAttempted.current) {
-      const hasSolanaWallet = user.wallet?.chainType === 'solana';
-      if (!hasSolanaWallet) {
-        walletCreationAttempted.current = true;
-        (async () => {
-          try {
-            await createWallet();
-          } catch (err) {
-            console.error("Error creating Solana wallet programmatically:", err);
-            walletCreationAttempted.current = false;
-          }
-        })();
-      }
-    }
-  }, [ready, authenticated, user, createWallet]);
 
   const name = user?.google?.name ||
     user?.apple?.name ||
