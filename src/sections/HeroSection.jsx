@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
 import { ArrowRightIcon } from "@/utility/icons";
