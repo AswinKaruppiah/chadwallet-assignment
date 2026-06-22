@@ -102,7 +102,7 @@ export default function TradeDashboard() {
         <ChartPanel activeToken={activeToken} loading={loading} />
 
         {/* RIGHT: Swaps & Positions */}
-        <SwapPanel activeToken={activeToken} />
+        <SwapPanel activeToken={activeToken} loading={loading} />
       </div>
     </div>
   );

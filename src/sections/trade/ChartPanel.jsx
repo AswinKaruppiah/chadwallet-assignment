@@ -72,21 +72,21 @@ export default function ChartPanel({ activeToken, loading }) {
         {/* Chart Source Toggle */}
         <Show>
           <Show.If isTrue={!loading && !!activeToken}>
-            <div className="absolute top-3 right-3 z-20 flex bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-0.5 text-[11px] font-bold">
+            <div className="absolute top-3 right-3 z-20 flex bg-[#0e0e12]/80 backdrop-blur-md ring-1 ring-white/[0.08] rounded-full p-0.5 gap-0.5 text-[11px] font-medium">
               <button
                 onClick={() => setChartSource("tv")}
-                className={`px-2.5 py-1 rounded-md transition-all duration-200 ${chartSource === "tv"
-                  ? "bg-orange-500 text-black shadow-md"
-                  : "text-white/60 hover:text-white"
+                className={`px-3 py-1.5 rounded-full transition-colors ${chartSource === "tv"
+                    ? "bg-white/10 text-white"
+                    : "text-white/40 hover:text-white/60"
                   }`}
               >
                 TradingView
               </button>
               <button
                 onClick={() => setChartSource("dex")}
-                className={`px-2.5 py-1 rounded-md transition-all duration-200 ${chartSource === "dex"
-                  ? "bg-orange-500 text-black shadow-md"
-                  : "text-white/60 hover:text-white"
+                className={`px-3 py-1.5 rounded-full transition-colors ${chartSource === "dex"
+                    ? "bg-white/10 text-white"
+                    : "text-white/40 hover:text-white/60"
                   }`}
               >
                 DEXScreener
