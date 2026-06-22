@@ -161,7 +161,7 @@ export default function LoginModal({ isOpen, onClose }) {
               disabled
               className="w-full bg-white/5 border border-white/10 text-white/40 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-3 cursor-not-allowed opacity-50 transition-all text-sm"
             >
-              <AppleIcon size={18} className="!fill-white/40" />
+              <AppleIcon size={22} className="!fill-white/40 -mt-1" />
               <span>Apple Login (Coming Soon)</span>
             </button>
           </div>
