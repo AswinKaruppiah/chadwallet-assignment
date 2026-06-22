@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { animateFadeYVariants } from "@/utility/animate";
 
 export default function FeaturesSection() {
   const features = [
@@ -53,20 +57,36 @@ export default function FeaturesSection() {
     >
       {/* Header */}
       <div className="mb-10 md:mb-16 text-left">
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white lowercase">
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={animateFadeYVariants({ delay: 0.2 })}
+          className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white lowercase"
+        >
           never miss out again
-        </h2>
-        <p className="text-lg md:text-2xl text-white/40 tracking-tight lowercase mt-2">
+        </motion.h2>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={animateFadeYVariants({ delay: 0.4 })}
+          className="text-lg md:text-2xl text-white/40 tracking-tight lowercase mt-2"
+        >
           the only social-first trading app
-        </p>
+        </motion.p>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {features.map((feature, i) => (
-          <div
+          <motion.div
             key={i}
-            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-[32px] min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 transition-all duration-300 shadow-2xl"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-20px" }}
+            variants={animateFadeYVariants({ delay: (i % 3) * 0.15 })}
+            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-[32px] min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 shadow-2xl"
           >
             <div className="p-6 md:p-8 pb-0">
               <span className="text-xs font-bold tracking-widest text-blue-500 uppercase">
@@ -89,7 +109,7 @@ export default function FeaturesSection() {
                 className="object-contain object-bottom transition-transform duration-500"
               />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
