@@ -50,7 +50,7 @@ export default function HeroSection() {
           }}
           onTouchStart={() => setHovered(true)}
           onTouchEnd={() => setHovered(false)}
-          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-300/30 border border-white/10 backdrop-blur-lg transition-all"
+          className="mt-4 relative flex items-center justify-center overflow-hidden font-bold text-base min-w-44 tracking-wide py-3 rounded-full bg-orange-400/40 border border-white/10 backdrop-blur-sm transition-all"
         >
           <motion.span
             animate={{ x: hovered ? -10 : 0 }}
