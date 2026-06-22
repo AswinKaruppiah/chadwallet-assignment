@@ -14,7 +14,7 @@ export default function ChartPanel({ activeToken, loading }) {
     if (upper === "SOL") return "BINANCE:SOLUSDT";
     if (upper === "USDC") return "BINANCE:USDCUSDT";
     if (upper === "USDT") return "BINANCE:USDTUSD";
-    return `BINANCE:${upper}USDT`;
+    return `MEXC:${upper}USDT`;
   };
 
   const [tvLoading, setTvLoading] = useState(true);
@@ -81,11 +81,11 @@ export default function ChartPanel({ activeToken, loading }) {
           </Show.If>
         </Show>
 
-        {/* Chart containers (always mounted to prevent layout re-creation, toggled via CSS hidden) */}
+        {/* Chart containers (only mounted when active to prevent background loading) */}
         <div className={`absolute inset-0 w-full h-full ${(!activeToken || loading) ? "hidden" : ""}`}>
-          <div className={`w-full h-full ${chartSource !== "tv" ? "hidden" : ""}`}>
-            <Show>
-              <Show.If isTrue={!!activeToken}>
+          <Show>
+            <Show.If isTrue={!!activeToken && chartSource === "tv"}>
+              <div className="w-full h-full">
                 <iframe
                   key={activeToken?.symbol}
                   src={`https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(getTradingViewSymbol(activeToken?.symbol))}&theme=dark&interval=15&style=1&timezone=Etc%2FUTC&locale=en`}
@@ -93,26 +93,24 @@ export default function ChartPanel({ activeToken, loading }) {
                   height="100%"
                   className="pointer-events-auto border-none w-full h-full"
                   onLoad={() => setTvLoading(false)}
-
                 />
-              </Show.If>
-            </Show>
-          </div>
-          <div className={`w-full h-full ${chartSource !== "dex" ? "hidden" : ""}`}>
-            <Show>
-              <Show.If isTrue={!!activeToken}>
+              </div>
+            </Show.If>
+            <Show.ElseIf isTrue={!!activeToken && chartSource === "dex"}>
+              <div className="w-full h-full">
                 <iframe
                   key={activeToken?.address}
                   src={`https://dexscreener.com/solana/${activeToken?.address}?embed=1&theme=dark&trades=0&info=0`}
                   width="100%"
                   height="100%"
                   className="pointer-events-auto border-none w-full h-full"
-                  onLoad={() => setDexLoading(false)}
-                  onError={() => console.log("Error loading DEX chart")}
+                  onLoad={() => {
+                    setDexLoading(false);
+                  }}
                 />
-              </Show.If>
-            </Show>
-          </div>
+              </div>
+            </Show.ElseIf>
+          </Show>
         </div>
 
         {/* Fallback */}
