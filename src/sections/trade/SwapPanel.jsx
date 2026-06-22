@@ -86,7 +86,7 @@ export default function SwapPanel({ activeToken, loading }) {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Image src={SOL_LOGO} width={20} height={20} alt="SOL" className="rounded-full" />
+              <Image src={SOL_LOGO} width={20} height={20} unoptimized alt="SOL" className="rounded-full" />
               <span className="text-xs font-semibold">SOL</span>
             </div>
             <span className="text-[10px] text-white/30 font-mono tabular-nums">
@@ -135,6 +135,7 @@ export default function SwapPanel({ activeToken, loading }) {
                         src={activeToken?.logo || ""}
                         width={20}
                         height={20}
+                        unoptimized
                         alt={activeToken?.symbol || ""}
                         className="w-5 h-5 rounded-full object-cover"
                       />

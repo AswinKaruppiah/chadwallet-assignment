@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useBirdeyeTokens } from "@/hooks/useBirdeyeTokens";
 import { formatPrice } from "@/utility/helper";
 import Show from "@/component/Show";
+import { useRouter } from "nextjs-toploader/app";
 
 function TokenCard({ token, onClick, onHover }) {
   const isPositive = token.change >= 0;
@@ -27,7 +28,7 @@ function TokenCard({ token, onClick, onHover }) {
       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white/10 shrink-0 flex items-center justify-center">
         <Show>
           <Show.If isTrue={!!token.image}>
-            <Image src={token.image} alt={token.symbol} fill className="object-cover" />
+            <Image src={token.image} alt={token.symbol} fill unoptimized className="object-cover" />
           </Show.If>
           <Show.Else>
             <div className="w-full h-full flex items-center justify-center font-bold text-[10px] bg-gradient-to-br from-orange-500/80 to-amber-500/80 rounded-full">
@@ -46,6 +47,7 @@ function TokenCard({ token, onClick, onHover }) {
 }
 
 export default function TokenBanner({ direction = "left", onTokenClick }) {
+  const router = useRouter();
   const [paused, setPaused] = useState(false);
   const { data: apiTokens, loading } = useBirdeyeTokens(20);
 
@@ -57,6 +59,14 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
     image: t.logo_uri || "",
     volume: t.volume_24h_usd || 0,
   })) || [];
+
+  const handleTokenClick = (token) => {
+    if (onTokenClick) {
+      onTokenClick(token);
+    } else {
+      router.push(`/trade?token=${token.symbol.toLowerCase()}`);
+    }
+  };
 
   if (loading) {
     return (
@@ -102,12 +112,12 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
       >
         <div className="flex gap-3 pr-3">
           {tokens.map((token, i) => (
-            <TokenCard key={`a-${token.symbol}-${i}`} token={token} onClick={onTokenClick} onHover={setPaused} />
+            <TokenCard key={`a-${token.symbol}-${i}`} token={token} onClick={handleTokenClick} onHover={setPaused} />
           ))}
         </div>
         <div className="flex gap-3 pr-3">
           {tokens.map((token, i) => (
-            <TokenCard key={`b-${token.symbol}-${i}`} token={token} onClick={onTokenClick} onHover={setPaused} />
+            <TokenCard key={`b-${token.symbol}-${i}`} token={token} onClick={handleTokenClick} onHover={setPaused} />
           ))}
         </div>
       </div>

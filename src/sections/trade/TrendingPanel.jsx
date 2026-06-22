@@ -69,6 +69,7 @@ export default function TrendingPanel({
                             src={token.logo}
                             alt={token.symbol}
                             fill
+                            unoptimized
                             className="object-cover"
                           />
                         </Show.If>
