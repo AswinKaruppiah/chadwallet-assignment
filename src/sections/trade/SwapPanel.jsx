@@ -19,6 +19,24 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
     setAmount("");
   }, [activeToken]);
 
+  // Fetch real-time SOL price on mount
+  useEffect(() => {
+    async function fetchSolPrice() {
+      try {
+        const res = await fetch("/api/sol-price");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.price) {
+            setSolPrice(data.price);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch SOL price:", err);
+      }
+    }
+    fetchSolPrice();
+  }, []);
+
   const handleAmountChange = (val) => {
     const cleanVal = val.replace(/,/g, ".");
     if (cleanVal === "" || /^\d*\.?\d*$/.test(cleanVal)) {
