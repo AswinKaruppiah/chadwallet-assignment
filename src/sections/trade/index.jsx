@@ -23,6 +23,7 @@ export default function TradeDashboard() {
     liquidity: t.liquidity || 0,
     marketCap: t.market_cap || 0,
     holders: t.holder || 0,
+    poolAddress: t.pool?.address || "",
   })) || [];
 
   const handleSelectToken = (token) => {
@@ -94,31 +95,28 @@ export default function TradeDashboard() {
       <div className="flex lg:hidden bg-black/40 border-b border-white/5 p-1.5 gap-1.5 shrink-0">
         <button
           onClick={() => setMobileTab("trending")}
-          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
-            mobileTab === "trending"
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "trending"
               ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
               : "text-white/40 hover:text-white/60"
-          }`}
+            }`}
         >
           Trending
         </button>
         <button
           onClick={() => setMobileTab("chart")}
-          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
-            mobileTab === "chart"
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "chart"
               ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
               : "text-white/40 hover:text-white/60"
-          }`}
+            }`}
         >
           Chart
         </button>
         <button
           onClick={() => setMobileTab("swap")}
-          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
-            mobileTab === "swap"
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "swap"
               ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
               : "text-white/40 hover:text-white/60"
-          }`}
+            }`}
         >
           Swap
         </button>

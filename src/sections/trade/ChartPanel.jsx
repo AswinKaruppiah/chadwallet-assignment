@@ -8,8 +8,9 @@ import Show from "@/component/Show";
 export default function ChartPanel({ activeToken, loading, className = "" }) {
   const [chartLoaded, setChartLoaded] = useState(false);
 
-  const src = activeToken?.address
-    ? `https://www.geckoterminal.com/solana/pools/${activeToken.address}?embed=1&info=0&swaps=0&light_chart=0&chart_type=market_cap&resolution=5m&bg_color=101010`
+  const poolAddr = activeToken?.poolAddress || activeToken?.address;
+  const src = poolAddr
+    ? `https://www.geckoterminal.com/solana/pools/${poolAddr}?embed=1&info=0&swaps=0&light_chart=0&chart_type=market_cap&resolution=5m&bg_color=101010`
     : "";
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
               onLoad={() => setChartLoaded(true)}
               allow="clipboard-write"
               allowFullScreen
-              style={{ width: "100%", height: "100%", filter: "brightness(1.3) saturate(0.9) sepia(0.25) contrast(1.15) hue-rotate(15deg)" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </Show.If>
         </Show>
