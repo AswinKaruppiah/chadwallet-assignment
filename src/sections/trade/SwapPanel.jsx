@@ -11,6 +11,9 @@ const QUICK_AMOUNTS = [25, 50, 75, 100];
 export default function SwapPanel({ activeToken, loading, className = "" }) {
   const [tradeTab, setTradeTab] = useState("buy");
   const [amount, setAmount] = useState("");
+  const [solPrice, setSolPrice] = useState(150); // Live price variable
+  const isBuy = tradeTab === "buy";
+  const solBalance = 12.45;
 
   useEffect(() => {
     setAmount("");
@@ -23,25 +26,18 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
     }
   };
 
-  const isSol = useMemo(() => {
-    return activeToken?.symbol?.toUpperCase() === "SOL";
-  }, [activeToken]);
-
-  const isBuy = tradeTab === "buy";
-  const solBalance = 12.45;
-
+  // Convert the entered SOL amount to the active token's quantity using dynamic prices
   const estimatedOutput = useMemo(() => {
-    if (!amount || !activeToken || isSol) return "";
-    return (Number(amount) * 145.2 / activeToken.price).toFixed(4);
-  }, [amount, activeToken, isSol]);
+    if (!amount || !activeToken || !solPrice) return "";
+    return (Number(amount) * solPrice / activeToken.price).toFixed(4);
+  }, [amount, activeToken, solPrice]);
 
   const solRate = useMemo(() => {
-    if (!activeToken) return "—";
-    return (145.2 / activeToken.price).toFixed(2);
-  }, [activeToken]);
+    if (!activeToken || !solPrice) return "—";
+    return (solPrice / activeToken.price).toFixed(2);
+  }, [activeToken, solPrice]);
 
   const handleQuickAmount = (pct) => {
-    if (isSol) return;
     setAmount((solBalance * pct / 100).toFixed(4));
   };
 
@@ -51,7 +47,7 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
       <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
         <h2 className="text-[13px] font-semibold tracking-tight">Swap</h2>
         <Show>
-          <Show.If isTrue={!!activeToken && !isSol}>
+          <Show.If isTrue={!!activeToken}>
             <span className="text-[10px] text-white/30 font-mono tabular-nums">
               1 SOL ≈ {solRate} {activeToken?.symbol}
             </span>
@@ -90,7 +86,7 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
               <span className="text-xs font-semibold">SOL</span>
             </div>
             <span className="text-[10px] text-white/30 font-mono tabular-nums">
-              {solBalance} SOL
+              {solBalance} SOL {solPrice && `(~$${(solBalance * solPrice).toFixed(2)})`}
             </span>
           </div>
           <div className="bg-white/[0.03] ring-1 ring-white/[0.06] rounded-lg px-3 py-2.5 focus-within:ring-orange-500/30 transition-colors">
@@ -99,10 +95,15 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
               inputMode="decimal"
               placeholder="0.0"
               value={amount}
-              disabled={isSol || loading}
+              disabled={loading}
               onChange={(e) => handleAmountChange(e.target.value)}
               className="bg-transparent text-lg font-mono font-semibold text-white outline-none w-full placeholder:text-white/15 disabled:cursor-not-allowed disabled:text-white/30"
             />
+            {amount && solPrice && (
+              <span className="text-[10px] text-white/20 block mt-1 font-mono">
+                ≈ ${(Number(amount) * solPrice).toFixed(2)} USD
+              </span>
+            )}
           </div>
           {/* Quick Amount Buttons */}
           <div className="flex gap-1.5">
@@ -110,7 +111,7 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
               <button
                 key={pct}
                 onClick={() => handleQuickAmount(pct)}
-                disabled={isSol || loading}
+                disabled={loading}
                 className="flex-1 py-1 text-[10px] font-medium text-white/30 bg-white/[0.03] hover:bg-orange-500/10 hover:text-orange-400/60 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {pct}%
@@ -152,9 +153,6 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
                 </Show.Else>
               </Show>
             </div>
-            <span className="text-[10px] text-white/30 font-mono tabular-nums">
-              0.00 {activeToken?.symbol}
-            </span>
           </div>
           <div className="bg-white/[0.03] ring-1 ring-white/[0.06] rounded-lg px-3 py-2.5">
             <input
@@ -169,10 +167,12 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
 
         {/* Rate Info */}
         <Show>
-          <Show.If isTrue={!isSol && !!amount && !!estimatedOutput}>
-            <div className="flex items-center justify-between text-[10px] text-white/25 font-mono tabular-nums px-1">
-              <span>Rate</span>
-              <span>1 {activeToken?.symbol} ≈ ${formatPrice(activeToken?.price)}</span>
+          <Show.If isTrue={!!amount && !!estimatedOutput}>
+            <div className="flex flex-col gap-1 text-[10px] text-white/25 font-mono tabular-nums px-1">
+              <div className="flex items-center justify-between">
+                <span>Rate</span>
+                <span>1 {activeToken?.symbol} ≈ ${formatPrice(activeToken?.price)}</span>
+              </div>
             </div>
           </Show.If>
         </Show>
@@ -182,13 +182,13 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
           onClick={() => {
             setAmount("");
           }}
-          disabled={isSol || !amount}
-          className={`w-full py-3 rounded-lg font-semibold text-sm transition-colors ${(isSol || !amount)
+          disabled={!amount}
+          className={`w-full py-3 rounded-lg font-semibold text-sm transition-colors ${!amount
             ? "bg-white/[0.04] text-white/20 cursor-not-allowed"
             : "bg-orange-500 hover:bg-orange-400 text-black"
             }`}
         >
-          {isSol ? "Cannot swap SOL to SOL" : `${isBuy ? "Buy" : "Sell"} ${activeToken?.symbol || ""}`}
+          {isBuy ? "Buy" : "Sell"} {activeToken?.symbol || ""}
         </button>
       </div>
     </div>
