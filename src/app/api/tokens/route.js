@@ -17,7 +17,7 @@ export async function GET(request) {
     return NextResponse.json({ error: 'API key not configured' }, { status: 500 });
   }
 
-  const url = `https://public-api.birdeye.so/defi/v3/token/list?sort_by=liquidity&sort_type=desc&limit=${limit}&ui_amount_mode=scaled`;
+  const url = `https://public-api.birdeye.so/defi/v3/token/meme/list?sort_by=progress_percent&sort_type=desc&source=all&offset=0&limit=${limit}&min_progress_percent=80&max_progress_percent=99.99&min_liquidity=1000&min_volume_24h_usd=500`;
 
   const res = await fetch(url, {
     headers: {

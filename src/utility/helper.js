@@ -40,12 +40,3 @@ export const generateMockHolders = (price) => {
   });
 };
 
-export const getTradingViewSymbol = (symbol) => {
-  if (!symbol) return "BINANCE:SOLUSDT";
-  const upper = symbol.toUpperCase();
-  if (upper === "SOL") return "BINANCE:SOLUSDT";
-  if (upper === "USDC") return "BINANCE:USDCUSDT";
-  if (upper === "USDT") return "BINANCE:USDTUSD";
-  return `MEXC:${upper}USDT`;
-};
-
