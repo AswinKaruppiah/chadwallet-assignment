@@ -8,7 +8,7 @@ import { formatPrice } from "@/utility/helper";
 const SOL_LOGO = "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png";
 const QUICK_AMOUNTS = [25, 50, 75, 100];
 
-export default function SwapPanel({ activeToken, loading }) {
+export default function SwapPanel({ activeToken, loading, className = "" }) {
   const [tradeTab, setTradeTab] = useState("buy");
   const [amount, setAmount] = useState("");
 
@@ -46,7 +46,7 @@ export default function SwapPanel({ activeToken, loading }) {
   };
 
   return (
-    <div className="w-full lg:w-[340px] flex-shrink-0 flex flex-col overflow-y-auto">
+    <div className={`w-full lg:w-[340px] flex-shrink-0 flex-col overflow-y-auto ${className}`}>
       {/* Header */}
       <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
         <h2 className="text-[13px] font-semibold tracking-tight">Swap</h2>

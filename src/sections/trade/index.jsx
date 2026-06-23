@@ -10,6 +10,7 @@ import SwapPanel from "./SwapPanel";
 export default function TradeDashboard() {
   const { data: rawTokens, loading } = useBirdeyeTokens();
   const [activeToken, setActiveToken] = useState(null);
+  const [mobileTab, setMobileTab] = useState("chart");
 
   const tokens = rawTokens?.map((t) => ({
     address: t.address,
@@ -31,6 +32,7 @@ export default function TradeDashboard() {
       url.searchParams.set("token", token.symbol.toLowerCase());
       window.history.pushState(null, "", url.toString());
     }
+    setMobileTab("chart");
   };
 
   // Set initial token when loading completes (based on URL params or default to first token)
@@ -88,6 +90,40 @@ export default function TradeDashboard() {
         <TopBar />
       </div>
 
+      {/* Mobile Tab Selector */}
+      <div className="flex lg:hidden bg-black/40 border-b border-white/5 p-1.5 gap-1.5 shrink-0">
+        <button
+          onClick={() => setMobileTab("trending")}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+            mobileTab === "trending"
+              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              : "text-white/40 hover:text-white/60"
+          }`}
+        >
+          Trending
+        </button>
+        <button
+          onClick={() => setMobileTab("chart")}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+            mobileTab === "chart"
+              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              : "text-white/40 hover:text-white/60"
+          }`}
+        >
+          Chart
+        </button>
+        <button
+          onClick={() => setMobileTab("swap")}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+            mobileTab === "swap"
+              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              : "text-white/40 hover:text-white/60"
+          }`}
+        >
+          Swap
+        </button>
+      </div>
+
       {/* Main Grid Layout */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
         {/* LEFT: Trending Tokens */}
@@ -96,13 +132,22 @@ export default function TradeDashboard() {
           loading={loading}
           activeToken={activeToken}
           setActiveToken={handleSelectToken}
+          className={mobileTab === "trending" ? "flex" : "hidden lg:flex"}
         />
 
         {/* MIDDLE: Price Chart & Info */}
-        <ChartPanel activeToken={activeToken} loading={loading} />
+        <ChartPanel
+          activeToken={activeToken}
+          loading={loading}
+          className={mobileTab === "chart" ? "flex" : "hidden lg:flex"}
+        />
 
         {/* RIGHT: Swaps & Positions */}
-        <SwapPanel activeToken={activeToken} loading={loading} />
+        <SwapPanel
+          activeToken={activeToken}
+          loading={loading}
+          className={mobileTab === "swap" ? "flex" : "hidden lg:flex"}
+        />
       </div>
     </div>
   );

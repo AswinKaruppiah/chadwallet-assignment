@@ -6,7 +6,7 @@ import LiveTrades from "./LiveTrades";
 import TokenInfoHeader from "./TokenInfoHeader";
 import { getTradingViewSymbol } from "@/utility/helper";
 
-export default function ChartPanel({ activeToken, loading }) {
+export default function ChartPanel({ activeToken, loading, className = "" }) {
   const [chartSource, setChartSource] = useState("tv");
   const [tvLoading, setTvLoading] = useState(true);
   const [dexLoading, setDexLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function ChartPanel({ activeToken, loading }) {
   }, [activeToken?.address, activeToken?.symbol]);
 
   return (
-    <div className="flex-1 flex flex-col border-r border-white/5 relative overflow-y-auto">
+    <div className={`flex-1 flex-col border-r border-white/5 relative overflow-y-auto ${className}`}>
       <TokenInfoHeader activeToken={activeToken} loading={loading} />
 
       {/* Chart Area */}

@@ -10,9 +10,10 @@ export default function TrendingPanel({
   loading,
   activeToken,
   setActiveToken,
+  className = "",
 }) {
   return (
-    <div className="w-full lg:w-[320px] flex-shrink-0 border-r border-white/5 flex flex-col">
+    <div className={`w-full lg:w-[320px] flex-shrink-0 border-r border-white/5 flex-col ${className}`}>
       <div className="px-4 py-2.5 border-b border-white/5 flex items-center justify-between">
         <h2 className="font-semibold text-[15px] tracking-tight flex items-center gap-2">
           Trending
