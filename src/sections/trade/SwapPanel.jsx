@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Show from "@/component/Show";
 import { formatPrice } from "@/utility/helper";
+import useSolPrice from "@/hooks/useSolPrice";
 
 const SOL_LOGO = "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png";
 const QUICK_AMOUNTS = [25, 50, 75, 100];
@@ -11,31 +12,13 @@ const QUICK_AMOUNTS = [25, 50, 75, 100];
 export default function SwapPanel({ activeToken, loading, className = "" }) {
   const [tradeTab, setTradeTab] = useState("buy");
   const [amount, setAmount] = useState("");
-  const [solPrice, setSolPrice] = useState(150); // Live price variable
+  const { solPrice, loading: solPriceLoading, error: solPriceError } = useSolPrice();
   const isBuy = tradeTab === "buy";
   const solBalance = 12.45;
 
   useEffect(() => {
     setAmount("");
   }, [activeToken]);
-
-  // Fetch real-time SOL price on mount
-  useEffect(() => {
-    async function fetchSolPrice() {
-      try {
-        const res = await fetch("/api/sol-price");
-        if (res.ok) {
-          const data = await res.json();
-          if (data.price) {
-            setSolPrice(data.price);
-          }
-        }
-      } catch (err) {
-        console.error("Failed to fetch SOL price:", err);
-      }
-    }
-    fetchSolPrice();
-  }, []);
 
   const handleAmountChange = (val) => {
     const cleanVal = val.replace(/,/g, ".");
@@ -65,11 +48,17 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
       <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
         <h2 className="text-[13px] font-semibold tracking-tight">Swap</h2>
         <Show>
-          <Show.If isTrue={!!activeToken}>
+          <Show.If isTrue={solPriceLoading || loading}>
+            <span className="text-[10px] text-white/20 animate-pulse font-mono">Loading SOL...</span>
+          </Show.If>
+          <Show.ElseIf isTrue={!!solPriceError}>
+            <span className="text-[10px] text-red-400 font-mono" title={solPriceError}>Price Error</span>
+          </Show.ElseIf>
+          <Show.ElseIf isTrue={!!activeToken}>
             <span className="text-[10px] text-white/30 font-mono tabular-nums">
               1 SOL ≈ {solRate} {activeToken?.symbol}
             </span>
-          </Show.If>
+          </Show.ElseIf>
         </Show>
       </div>
 
