@@ -1,9 +1,19 @@
 // Format numbers
 export const formatPrice = (price) => {
   if (!price) return "0.00";
-  if (price < 0.0001) return price.toExponential(4);
-  if (price < 1) return price.toPrecision(4);
-  return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  const num = Number(price);
+  if (isNaN(num)) return "0.00";
+
+  if (num < 0.0001) {
+    const str = num.toFixed(20);
+    const match = str.match(/^0\.(0+)/);
+    const zeroCount = match ? match[1].length : 0;
+    const decimalPlaces = Math.min(zeroCount + 4, 20);
+    const formatted = num.toFixed(decimalPlaces);
+    return formatted.replace(/\.?0+$/, "");
+  }
+  if (num < 1) return num.toPrecision(4);
+  return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 });
 };
 
 export const formatAmount = (num) => {

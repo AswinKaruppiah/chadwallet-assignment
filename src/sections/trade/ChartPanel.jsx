@@ -54,7 +54,7 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
         </Show>
       </div>
 
-      <LiveTrades activeToken={activeToken} />
+      <LiveTrades activeToken={activeToken} loading={loading} />
     </div>
   );
 }
