@@ -24,16 +24,16 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
       <TokenInfoHeader activeToken={activeToken} loading={loading} />
 
       {/* Chart Area */}
-      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-white/5">
+      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-[#101010]">
         <Show>
           <Show.If isTrue={loading || !activeToken}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-white/5">
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#101010]">
               <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
               Scanning networks...
             </div>
           </Show.If>
           <Show.ElseIf isTrue={!chartLoaded}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-white/5">
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#101010]">
               <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
               Loading chart...
             </div>
