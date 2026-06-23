@@ -47,7 +47,7 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
               onLoad={() => setChartLoaded(true)}
               allow="clipboard-write"
               allowFullScreen
-              className="border-none w-full h-full relative z-10 pointer-events-auto bg-white/5"
+              style={{ width: "100%", height: "100%", filter: "brightness(1.3) saturate(0.9) sepia(0.25) contrast(1.15) hue-rotate(15deg)" }}
             />
           </Show.If>
         </Show>
