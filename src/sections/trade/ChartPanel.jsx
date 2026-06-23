@@ -16,7 +16,7 @@ export default function ChartPanel({ activeToken, loading }) {
       setTvLoading(true);
       setDexLoading(true);
     }
-  }, [activeToken?.address, activeToken?.symbol, chartSource]);
+  }, [activeToken?.address, activeToken?.symbol]);
 
   return (
     <div className="flex-1 flex flex-col border-r border-white/5 relative overflow-y-auto">
@@ -50,11 +50,11 @@ export default function ChartPanel({ activeToken, loading }) {
           </Show.If>
         </Show>
 
-        {/* Chart containers (only mounted when active to prevent background loading) */}
-        <div className={`absolute inset-0 w-full h-full ${(!activeToken || loading) ? "hidden" : ""}`}>
-          <Show>
-            <Show.If isTrue={!!activeToken && chartSource === "tv"}>
-              <div className="w-full h-full">
+        {/* Chart containers (both mounted and kept in DOM, toggle visibility to prevent reload) */}
+        <Show>
+          <Show.If isTrue={!!activeToken}>
+            <div className={`absolute inset-0 w-full h-full ${loading ? "hidden" : ""}`}>
+              <div className={`w-full h-full ${chartSource === "tv" ? "relative" : "absolute inset-0 opacity-0 pointer-events-none"}`}>
                 <iframe
                   key={activeToken?.symbol}
                   src={`https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(getTradingViewSymbol(activeToken?.symbol))}&theme=dark&interval=15&style=1&timezone=Etc%2FUTC&locale=en`}
@@ -64,9 +64,7 @@ export default function ChartPanel({ activeToken, loading }) {
                   onLoad={() => setTvLoading(false)}
                 />
               </div>
-            </Show.If>
-            <Show.ElseIf isTrue={!!activeToken && chartSource === "dex"}>
-              <div className="w-full h-full">
+              <div className={`w-full h-full ${chartSource === "dex" ? "relative" : "absolute inset-0 opacity-0 pointer-events-none"}`}>
                 <iframe
                   key={activeToken?.address}
                   src={`https://dexscreener.com/solana/${activeToken?.address}?embed=1&theme=dark&trades=0&info=0`}
@@ -76,9 +74,9 @@ export default function ChartPanel({ activeToken, loading }) {
                   onLoad={() => setDexLoading(false)}
                 />
               </div>
-            </Show.ElseIf>
-          </Show>
-        </div>
+            </div>
+          </Show.If>
+        </Show>
 
         {/* Loading / Scanning Overlays */}
         <Show>
@@ -88,7 +86,7 @@ export default function ChartPanel({ activeToken, loading }) {
               Scanning networks...
             </div>
           </Show.If>
-          <Show.ElseIf isTrue={!!activeToken && ((chartSource === "tv" && tvLoading) || (chartSource === "dex" && dexLoading))}>
+          <Show.ElseIf isTrue={!!activeToken && (chartSource === "tv" ? tvLoading : dexLoading)}>
             <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
               <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
               Loading chart...
