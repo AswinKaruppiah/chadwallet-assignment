@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ChadWallet - Solana Meme Trading Interface
+
+ChadWallet is a high-fidelity web interface built with Next.js and React for tracking and trading Solana meme tokens. This repository has been updated with real-time market data integration from the Birdeye API and interactive chart controls.
+
+## Key Features & Implementations
+
+### 1. Live Birdeye Token API Integration
+* **API Endpoint Proxy (`/api/tokens`)**: Established a server-side route fetching real Solana meme tokens sorted by progress/liquidity/volume using the Birdeye Meme List API.
+* **Custom React Hook (`useBirdeyeTokens`)**:
+  * Powers the `TokenBanner` and `TrendingPanel` components.
+  * Implements **Request Coalescing** so concurrent hook instances share the same network promise.
+  * Implements **Client-side Caching** to minimize redundant hits to the backend server.
+
+### 2. Live SOL Price Endpoint & Hook
+* **CORS Proxy Routing (`/api/sol-price`)**: Bypasses browser `strict-origin-when-cross-origin` CORS restrictions by querying the Birdeye DeFi Price endpoint on the server side.
+* **Custom React Hook (`useSolPrice`)**:
+  * Exposes `{ solPrice, loading, error }` states.
+  * Features a **10-minute client-side cache** and promise coalescing to protect against API key rate-limits.
+  * Fully integrated into the `SwapPanel` component for live SOL-to-token quantity calculations without page layout changes.
+
+### 3. TradingView Chart Integration
+* Embedded a real-time TradingView widget that dynamically tracks token price charts.
+* Designed premium custom loaders and skeleton components matching ChadWallet's neon and dark aesthetic during frame loads.
+
+---
+
+## Technical Architecture
+
+```mermaid
+graph TD
+    Client[SwapPanel / TrendingPanel] -- Local Request --> Hook[useSolPrice / useBirdeyeTokens Hook]
+    Hook -- In-Memory Cache (10m) / Request Coalescence --> Client
+    Hook -- Fetch Proxy --> Backend[NextJS API Route /api/sol-price]
+    Backend -- Server-to-Server Call (No CORS) --> Birdeye[Birdeye DeFi API]
+```
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 1. Setup Environment Variables
+Create a `.env` or `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id
+BIRDEYE_API_KEY=your_birdeye_api_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Development Server
+Install dependencies and run the server:
+```bash
+npm install
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to experience the dashboard.
