@@ -6,35 +6,33 @@ import TokenInfoHeader from "./TokenInfoHeader";
 import Show from "@/component/Show";
 
 export default function ChartPanel({ activeToken, loading, className = "" }) {
-  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+  const [chartLoaded, setChartLoaded] = useState(false);
 
   const src = activeToken?.address
-    ? `https://birdeye.so/tv-widget/${activeToken.address}?chain=solana`
+    ? `https://www.geckoterminal.com/solana/pools/${activeToken.address}?embed=1&info=0&swaps=0&light_chart=0&chart_type=market_cap&resolution=5m&bg_color=101010`
     : "";
-
-  const showLoading = activeToken && (loading || !hasLoadedOnce);
 
   useEffect(() => {
     if (activeToken) {
-      setHasLoadedOnce(false);
+      setChartLoaded(false);
     }
-  }, [activeToken?.address, activeToken?.symbol]);
+  }, [activeToken]);
 
   return (
     <div className={`flex-1 flex-col border-r border-white/5 relative overflow-y-auto ${className}`}>
-      <TokenInfoHeader activeToken={activeToken} loading={showLoading} />
+      <TokenInfoHeader activeToken={activeToken} loading={loading} />
 
       {/* Chart Area */}
-      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-[#0a0a0e]">
+      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-white/5">
         <Show>
           <Show.If isTrue={loading || !activeToken}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#0a0a0e]">
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-white/5">
               <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
               Scanning networks...
             </div>
           </Show.If>
-          <Show.ElseIf isTrue={!!activeToken && !hasLoadedOnce}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#0a0a0e]">
+          <Show.ElseIf isTrue={!chartLoaded}>
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-white/5">
               <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
               Loading chart...
             </div>
@@ -43,12 +41,13 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
         <Show>
           <Show.If isTrue={!!activeToken}>
             <iframe
+              id="geckoterminal-embed"
+              title="GeckoTerminal Embed"
               src={src || "about:blank"}
-              onLoad={() => { setHasLoadedOnce(true); }}
-              width="100%"
-              height="100%"
-              className="border-none w-full h-full relative z-10 pointer-events-auto"
+              onLoad={() => setChartLoaded(true)}
+              allow="clipboard-write"
               allowFullScreen
+              className="border-none w-full h-full relative z-10 pointer-events-auto bg-white/5"
             />
           </Show.If>
         </Show>
