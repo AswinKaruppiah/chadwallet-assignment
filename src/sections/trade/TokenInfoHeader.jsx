@@ -18,7 +18,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
 
   return (
     <Show>
-      <Show.If isTrue={loading}>
+      <Show.If isTrue={loading || !activeToken}>
         <div className="px-4 py-2 border-b border-white/5 bg-white/5 backdrop-blur-md z-10 flex items-center justify-between gap-3 animate-pulse">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-full bg-white/10" />
@@ -33,7 +33,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
           </div>
         </div>
       </Show.If>
-      <Show.ElseIf isTrue={!!activeToken}>
+      <Show.Else >
         <div className="px-4 py-2 border-b border-white/5 bg-white/5 backdrop-blur-md z-10 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="relative w-7 h-7 rounded-full overflow-hidden bg-white/[0.06] shrink-0 flex items-center justify-center ring-1 ring-white/[0.08]">
@@ -89,7 +89,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
             <span className="hidden md:inline text-white/40 text-[11px]">Liq <span className="text-white/70">${formatAmount(activeToken?.liquidity)}</span></span>
           </div>
         </div>
-      </Show.ElseIf>
+      </Show.Else>
     </Show>
   );
 }

@@ -4,19 +4,10 @@ import { useState, useEffect } from "react";
 import Show from "@/component/Show";
 import LiveTrades from "./LiveTrades";
 import TokenInfoHeader from "./TokenInfoHeader";
+import { getTradingViewSymbol } from "@/utility/helper";
 
 export default function ChartPanel({ activeToken, loading }) {
   const [chartSource, setChartSource] = useState("tv");
-
-  const getTradingViewSymbol = (symbol) => {
-    if (!symbol) return "BINANCE:SOLUSDT";
-    const upper = symbol.toUpperCase();
-    if (upper === "SOL") return "BINANCE:SOLUSDT";
-    if (upper === "USDC") return "BINANCE:USDCUSDT";
-    if (upper === "USDT") return "BINANCE:USDTUSD";
-    return `MEXC:${upper}USDT`;
-  };
-
   const [tvLoading, setTvLoading] = useState(true);
   const [dexLoading, setDexLoading] = useState(true);
 
@@ -25,16 +16,14 @@ export default function ChartPanel({ activeToken, loading }) {
       setTvLoading(true);
       setDexLoading(true);
     }
-  }, [activeToken?.address, activeToken?.symbol]);
-
-  const isChartLoading = chartSource === "tv" ? tvLoading : dexLoading;
+  }, [activeToken?.address, activeToken?.symbol, chartSource]);
 
   return (
     <div className="flex-1 flex flex-col border-r border-white/5 relative overflow-y-auto">
       <TokenInfoHeader activeToken={activeToken} loading={loading} />
 
       {/* Chart Area */}
-      <div className="flex-1 min-h-[400px] relative">
+      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative">
         {/* Chart Source Toggle */}
         <Show>
           <Show.If isTrue={!loading && !!activeToken}>
@@ -57,26 +46,6 @@ export default function ChartPanel({ activeToken, loading }) {
               >
                 DEXScreener
               </button>
-            </div>
-          </Show.If>
-        </Show>
-
-        {/* Loading Spinner */}
-        <Show>
-          <Show.If isTrue={loading}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
-              <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
-              Scanning networks...
-            </div>
-          </Show.If>
-        </Show>
-
-        {/* Chart Load State Overlay */}
-        <Show>
-          <Show.If isTrue={!loading && !!activeToken && isChartLoading}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
-              <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
-              Loading chart...
             </div>
           </Show.If>
         </Show>
@@ -104,22 +73,27 @@ export default function ChartPanel({ activeToken, loading }) {
                   width="100%"
                   height="100%"
                   className="pointer-events-auto border-none w-full h-full"
-                  onLoad={() => {
-                    setDexLoading(false);
-                  }}
+                  onLoad={() => setDexLoading(false)}
                 />
               </div>
             </Show.ElseIf>
           </Show>
         </div>
 
-        {/* Fallback */}
+        {/* Loading / Scanning Overlays */}
         <Show>
-          <Show.If isTrue={!loading && !activeToken}>
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center text-white/20 z-10 bg-[#0a0a0e]">
-              Select a token to view chart
+          <Show.If isTrue={loading || !activeToken}>
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
+              <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
+              Scanning networks...
             </div>
           </Show.If>
+          <Show.ElseIf isTrue={!!activeToken && ((chartSource === "tv" && tvLoading) || (chartSource === "dex" && dexLoading))}>
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-10 bg-[#0a0a0e]">
+              <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
+              Loading chart...
+            </div>
+          </Show.ElseIf>
         </Show>
       </div>
 
