@@ -179,6 +179,9 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
 
         {/* Submit */}
         <button
+          onClick={() => {
+            setAmount("");
+          }}
           disabled={isSol || !amount}
           className={`w-full py-3 rounded-lg font-semibold text-sm transition-colors ${(isSol || !amount)
             ? "bg-white/[0.04] text-white/20 cursor-not-allowed"

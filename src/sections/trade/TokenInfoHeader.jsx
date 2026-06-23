@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { TrendingUpIcon, TrendingDownIcon, CopyIcon, CheckIcon } from "lucide-react";
-import { formatPrice, formatAmount } from "@/utility/helper";
+import { formatAmount } from "@/utility/helper";
 import Show from "@/component/Show";
 import Image from "next/image";
 
@@ -26,9 +26,9 @@ export default function TokenInfoHeader({ activeToken, loading }) {
             <div className="h-3.5 w-8 bg-white/5 rounded" />
           </div>
           <div className="flex items-center gap-3">
-            <div className="h-4 w-16 bg-white/10 rounded" />
             <div className="h-3.5 w-12 bg-white/10 rounded-full" />
             <div className="w-px h-4 bg-white/[0.06]" />
+            <div className="h-4 w-16 bg-white/10 rounded" />
             <div className="h-4 w-20 bg-white/10 rounded" />
           </div>
         </div>
@@ -67,7 +67,6 @@ export default function TokenInfoHeader({ activeToken, loading }) {
           </div>
 
           <div className="flex items-center gap-3 shrink-0 text-[12px] font-mono tabular-nums">
-            <span className="font-semibold text-white">${formatPrice(activeToken?.price)}</span>
             <span
               className={`inline-flex items-center gap-0.5 text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${activeToken?.change >= 0
                 ? "text-emerald-400 bg-emerald-500/10"

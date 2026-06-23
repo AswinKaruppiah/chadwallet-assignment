@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+const globalPromises = {};
+const globalCaches = {};
+
 export function useBirdeyeTokens(limit = 20) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,16 +16,38 @@ export function useBirdeyeTokens(limit = 20) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`/api/tokens?limit=${limit}`);
-
-        if (!response.ok) {
-          throw new Error(`API request failed with status: ${response.status}`);
+        // Reuse client-side cache if available
+        if (globalCaches[limit]) {
+          if (isMounted) {
+            setData(globalCaches[limit]);
+            setLoading(false);
+          }
+          return;
         }
 
-        const json = await response.json();
+        // Coalesce concurrent requests into a single promise
+        if (!globalPromises[limit]) {
+          globalPromises[limit] = fetch(`/api/tokens?limit=${limit}`)
+            .then(async (response) => {
+              if (!response.ok) {
+                throw new Error(`API request failed with status: ${response.status}`);
+              }
+              const json = await response.json();
+              const tokens = json.tokens || [];
+              globalCaches[limit] = tokens;
+              delete globalPromises[limit];
+              return tokens;
+            })
+            .catch((err) => {
+              delete globalPromises[limit];
+              throw err;
+            });
+        }
+
+        const tokens = await globalPromises[limit];
 
         if (isMounted) {
-          setData(json.tokens || []);
+          setData(tokens);
           setLoading(false);
         }
       } catch (err) {

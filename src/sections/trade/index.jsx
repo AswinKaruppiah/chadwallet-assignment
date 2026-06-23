@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useBirdeyeTokens } from "@/hooks/useBirdeyeTokens";
 import TopBar from "@/component/TopBar";
 import TrendingPanel from "./TrendingPanel";
@@ -12,19 +12,21 @@ export default function TradeDashboard() {
   const [activeToken, setActiveToken] = useState(null);
   const [mobileTab, setMobileTab] = useState("chart");
 
-  const tokens = rawTokens?.map((t) => ({
-    address: t.address,
-    symbol: t.symbol,
-    name: t.name,
-    price: t.price || 0,
-    change: t.price_change_24h_percent || 0,
-    logo: t.logo_uri || "",
-    volume: t.volume_24h_usd || 0,
-    liquidity: t.liquidity || 0,
-    marketCap: t.market_cap || 0,
-    holders: t.holder || 0,
-    poolAddress: t.pool?.address || "",
-  })) || [];
+  const tokens = useMemo(() => {
+    return rawTokens?.map((t) => ({
+      address: t.address,
+      symbol: t.symbol,
+      name: t.name,
+      price: t.price || 0,
+      change: t.price_change_24h_percent || 0,
+      logo: t.logo_uri || "",
+      volume: t.volume_24h_usd || 0,
+      liquidity: t.liquidity || 0,
+      marketCap: t.market_cap || 0,
+      holders: t.holder || 0,
+      poolAddress: t.pool?.address || "",
+    })) || [];
+  }, [rawTokens]);
 
   const handleSelectToken = (token) => {
     setActiveToken(token);
