@@ -82,7 +82,7 @@ export default function TopHolders({ activeToken }) {
       </thead>
       <tbody className="font-mono">
         <Show>
-          <Show.If isTrue={loadingHolders && holders.length === 0}>
+          <Show.If isTrue={loadingHolders}>
             <tr>
               <td colSpan="5" className="p-8 text-center text-white/40">
                 <div className="w-5 h-5 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mx-auto mb-2" />
