@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import LiveTrades from "./LiveTrades";
 import TokenInfoHeader from "./TokenInfoHeader";
 import Show from "@/component/Show";
+import TradeActivityPanel from "./TradeActivityPanel";
 
 export default function ChartPanel({ activeToken, loading, className = "" }) {
   const [chartLoaded, setChartLoaded] = useState(false);
@@ -54,7 +54,7 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
         </Show>
       </div>
 
-      <LiveTrades activeToken={activeToken} loading={loading} />
+      <TradeActivityPanel activeToken={activeToken} loading={loading} />
     </div>
   );
 }
