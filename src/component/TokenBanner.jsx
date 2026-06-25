@@ -71,8 +71,8 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
   if (loading) {
     return (
       <div className="relative w-full overflow-hidden min-h-14 py-2">
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#060510] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#060510] to-transparent z-10 pointer-events-none" />
         <div className="flex gap-3 px-3">
           {Array.from({ length: 8 }).map((_, i) => (
             <div
@@ -101,8 +101,8 @@ export default function TokenBanner({ direction = "left", onTokenClick }) {
       className="relative w-full overflow-hidden min-h-14 py-2"
     >
       {/* Edge fades */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#060510] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#060510] to-transparent z-10 pointer-events-none" />
       <div
         className="flex w-max will-change-transform"
         style={{

@@ -67,50 +67,50 @@ export default function LiveTrades({ activeToken }) {
   }, [activeToken?.address]);
 
   return (
-    <table className="w-full text-left text-xs">
-      <thead className="text-white/30 sticky top-0 bg-[#0c0c0c] z-10">
+    <table className="w-full text-left text-xs border-collapse">
+      <thead className="sticky top-0 bg-[#060510]/80 backdrop-blur-md z-10 border-b border-white/5">
         <tr>
-          <th className="font-medium p-2 bg-[#0c0c0c]/80 backdrop-blur-sm">Time</th>
-          <th className="font-medium p-2 bg-[#0c0c0c]/80 backdrop-blur-sm">Type</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Price</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Amount ({activeToken?.symbol || "Token"})</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Total (USD)</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Time</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Type</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Price</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Amount ({activeToken?.symbol || "Token"})</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Total (USD)</th>
         </tr>
       </thead>
-      <tbody className="font-mono">
+      <tbody className="font-mono divide-y divide-white/[0.02]">
         <Show>
           <Show.If isTrue={loadingTrades}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-white/40">
-                <div className="w-5 h-5 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mx-auto mb-2" />
+              <td colSpan="5" className="px-4 py-8 text-center text-white/40">
+                <div className="w-5 h-5 border-2 border-[#516af6]/30 border-t-[#516af6] rounded-full animate-spin mx-auto mb-2" />
                 Loading live trades...
               </td>
             </tr>
           </Show.If>
           <Show.ElseIf isTrue={!!tradesError}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-red-400/80">
+              <td colSpan="5" className="px-4 py-8 text-center text-red-400/80">
                 {tradesError}
               </td>
             </tr>
           </Show.ElseIf>
           <Show.ElseIf isTrue={trades.length === 0}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-white/30">
+              <td colSpan="5" className="px-4 py-8 text-center text-white/30">
                 No trades found.
               </td>
             </tr>
           </Show.ElseIf>
           <Show.Else>
             {trades.map((trade) => (
-              <tr key={trade.id} className="hover:bg-white/5 transition-colors">
-                <td className="p-2 text-white/50">{trade.time}</td>
-                <td className={`p-2 font-bold ${trade.type === "buy" ? "text-green-400" : "text-red-400"}`}>
+              <tr key={trade.id} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-2.5 text-white/50">{trade.time}</td>
+                <td className={`px-4 py-2.5 font-bold ${trade.type === "buy" ? "text-green-400" : "text-red-400"}`}>
                   {trade.type.toUpperCase()}
                 </td>
-                <td className="p-2 text-right">${formatPrice(trade.price)}</td>
-                <td className="p-2 text-right">{formatAmount(trade.amount)}</td>
-                <td className="p-2 text-right">${formatPrice(trade.totalUsd)}</td>
+                <td className="px-4 py-2.5 text-right text-white/90">${formatPrice(trade.price)}</td>
+                <td className="px-4 py-2.5 text-right text-white/90">{formatAmount(trade.amount)}</td>
+                <td className="px-4 py-2.5 text-right text-white/95">${formatPrice(trade.totalUsd)}</td>
               </tr>
             ))}
           </Show.Else>

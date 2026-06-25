@@ -70,48 +70,48 @@ export default function TopHolders({ activeToken }) {
   }, [activeToken?.address]);
 
   return (
-    <table className="w-full text-left text-xs">
-      <thead className="text-white/30 sticky top-0 bg-[#0c0c0c] z-10">
+    <table className="w-full text-left text-xs border-collapse">
+      <thead className="sticky top-0 bg-[#060510]/80 backdrop-blur-md z-10 border-b border-white/5">
         <tr>
-          <th className="font-medium p-2 bg-[#0c0c0c]/80 backdrop-blur-sm">Rank</th>
-          <th className="font-medium p-2 bg-[#0c0c0c]/80 backdrop-blur-sm">Address</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Balance</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Percentage</th>
-          <th className="font-medium p-2 text-right bg-[#0c0c0c]/80 backdrop-blur-sm">Value (USD)</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Rank</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Address</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Balance</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Percentage</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Value (USD)</th>
         </tr>
       </thead>
-      <tbody className="font-mono">
+      <tbody className="font-mono divide-y divide-white/[0.02]">
         <Show>
           <Show.If isTrue={loadingHolders}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-white/40">
-                <div className="w-5 h-5 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mx-auto mb-2" />
+              <td colSpan="5" className="px-4 py-8 text-center text-white/40">
+                <div className="w-5 h-5 border-2 border-[#516af6]/30 border-t-[#516af6] rounded-full animate-spin mx-auto mb-2" />
                 Loading top holders...
               </td>
             </tr>
           </Show.If>
           <Show.ElseIf isTrue={!!holdersError}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-red-400/80">
+              <td colSpan="5" className="px-4 py-8 text-center text-red-400/80">
                 {holdersError}
               </td>
             </tr>
           </Show.ElseIf>
           <Show.ElseIf isTrue={holders.length === 0}>
             <tr>
-              <td colSpan="5" className="p-8 text-center text-white/30">
+              <td colSpan="5" className="px-4 py-8 text-center text-white/30">
                 No holders found.
               </td>
             </tr>
           </Show.ElseIf>
           <Show.Else>
             {holders.map((holder) => (
-              <tr key={holder.rank} className="hover:bg-white/5 transition-colors">
-                <td className="p-2 text-white/50">{holder.rank}</td>
-                <td className="p-2 text-white/80" title={holder.fullAddress}>{holder.address}</td>
-                <td className="p-2 text-right text-white">{formatAmount(holder.balance)} {activeToken?.symbol}</td>
-                <td className="p-2 text-right text-orange-400">{holder.percentage.toFixed(2)}%</td>
-                <td className="p-2 text-right text-emerald-400">${formatPrice(holder.value)}</td>
+              <tr key={holder.rank} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-2.5 text-white/50">{holder.rank}</td>
+                <td className="px-4 py-2.5 text-white/80" title={holder.fullAddress}>{holder.address}</td>
+                <td className="px-4 py-2.5 text-right text-white/90">{formatAmount(holder.balance)} {activeToken?.symbol}</td>
+                <td className="px-4 py-2.5 text-right text-[#516af6] font-semibold">{holder.percentage.toFixed(2)}%</td>
+                <td className="px-4 py-2.5 text-right text-emerald-400">${formatPrice(holder.value)}</td>
               </tr>
             ))}
           </Show.Else>

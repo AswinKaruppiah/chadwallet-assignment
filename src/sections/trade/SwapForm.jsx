@@ -63,8 +63,8 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
         <div className="flex bg-white/[0.04] rounded-lg p-0.5 gap-0.5">
           <button
             onClick={() => setTradeTab("buy")}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${isBuy
-              ? "bg-orange-500/15 text-orange-400"
+            className={`flex-1 py-1.5 text-xs font-bold rounded-md transition-colors ${isBuy
+              ? "bg-green-500/10 text-green-400 ring-1 ring-green-500/20"
               : "text-white/35 hover:text-white/50"
               }`}
           >
@@ -72,8 +72,8 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
           </button>
           <button
             onClick={() => setTradeTab("sell")}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${!isBuy
-              ? "bg-orange-500/15 text-orange-400"
+            className={`flex-1 py-1.5 text-xs font-bold rounded-md transition-colors ${!isBuy
+              ? "bg-red-500/10 text-red-400 ring-1 ring-red-500/20"
               : "text-white/35 hover:text-white/50"
               }`}
           >
@@ -92,7 +92,7 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
               {solBalance} SOL {solPrice && `(~$${(solBalance * solPrice).toFixed(2)})`}
             </span>
           </div>
-          <div className="bg-white/[0.03] ring-1 ring-white/[0.06] rounded-lg px-3 py-2.5 focus-within:ring-orange-500/30 transition-colors">
+          <div className="bg-white/[0.03] ring-1 ring-white/[0.06] rounded-lg px-3 py-2.5 focus-within:ring-[#516af6]/30 transition-colors">
             <input
               type="text"
               inputMode="decimal"
@@ -115,7 +115,7 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
                 key={pct}
                 onClick={() => handleQuickAmount(pct)}
                 disabled={loading}
-                className="flex-1 py-1 text-[10px] font-medium text-white/30 bg-white/[0.03] hover:bg-orange-500/10 hover:text-orange-400/60 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex-1 py-1 text-[10px] font-medium text-white/30 bg-white/[0.03] hover:bg-[#516af6]/10 hover:text-[#516af6]/60 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {pct}%
               </button>
@@ -145,7 +145,7 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
                       />
                     </Show.If>
                     <Show.Else>
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-500/80 to-amber-500/80 flex items-center justify-center text-[7px] font-bold">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#516af6]/80 to-[#a3b1ff]/80 flex items-center justify-center text-[7px] font-bold">
                         {activeToken?.symbol?.slice(0, 2)}
                       </div>
                     </Show.Else>

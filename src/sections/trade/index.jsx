@@ -98,7 +98,7 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("trending")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "trending"
-              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
               : "text-white/40 hover:text-white/60"
             }`}
         >
@@ -107,7 +107,7 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("chart")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "chart"
-              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
               : "text-white/40 hover:text-white/60"
             }`}
         >
@@ -116,7 +116,7 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("swap")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "swap"
-              ? "bg-orange-500/10 text-orange-400 ring-1 ring-orange-500/20"
+              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
               : "text-white/40 hover:text-white/60"
             }`}
         >

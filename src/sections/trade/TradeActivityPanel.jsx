@@ -15,7 +15,7 @@ export default function TradeActivityPanel({ activeToken, loading }) {
       <Show>
         <Show.If isTrue={loading || !activeToken}>
           <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#0c0c0c]/85 backdrop-blur-sm">
-            <div className="w-6 h-6 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[#516af6]/30 border-t-[#516af6] rounded-full animate-spin" />
             <span>Scanning networks...</span>
           </div>
         </Show.If>
@@ -28,7 +28,7 @@ export default function TradeActivityPanel({ activeToken, loading }) {
             onClick={() => setActiveTab("trades")}
             className={`py-3 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
               activeTab === "trades"
-                ? "text-white border-orange-500"
+                ? "text-white border-[#516af6]"
                 : "text-white/40 hover:text-white border-transparent"
             }`}
           >
@@ -38,7 +38,7 @@ export default function TradeActivityPanel({ activeToken, loading }) {
             onClick={() => setActiveTab("holders")}
             className={`py-3 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
               activeTab === "holders"
-                ? "text-white border-orange-500"
+                ? "text-white border-[#516af6]"
                 : "text-white/40 hover:text-white border-transparent"
             }`}
           >

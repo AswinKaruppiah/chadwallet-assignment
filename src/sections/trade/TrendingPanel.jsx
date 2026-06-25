@@ -54,12 +54,12 @@ export default function TrendingPanel({
                   <button
                     key={token.address}
                     onClick={() => setActiveToken(token)}
-                    className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150 ${isActive
-                      ? "bg-orange-500/10 ring-1 ring-orange-500/20"
+                    className={`relative group flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150 ${isActive
+                      ? "bg-white/[0.06] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[3px] before:bg-[#516af6] before:rounded-r"
                       : "hover:bg-white/[0.04]"
                       }`}
                   >
-                    <span className="text-[10px] font-mono text-white/20 w-4 text-right tabular-nums shrink-0">
+                    <span className={`text-[10px] font-mono w-4 text-right tabular-nums shrink-0 transition-colors ${isActive ? "text-[#516af6] font-bold" : "text-white/20"}`}>
                       {index + 1}
                     </span>
 
@@ -75,7 +75,7 @@ export default function TrendingPanel({
                           />
                         </Show.If>
                         <Show.Else>
-                          <div className="w-full h-full flex items-center justify-center font-bold text-xs bg-gradient-to-br from-orange-500/80 to-amber-500/80">
+                          <div className="w-full h-full flex items-center justify-center font-bold text-xs bg-gradient-to-br from-[#516af6]/80 to-[#a3b1ff]/80">
                             {token.symbol?.slice(0, 2)}
                           </div>
                         </Show.Else>

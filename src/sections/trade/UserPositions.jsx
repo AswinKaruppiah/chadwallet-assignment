@@ -26,7 +26,7 @@ export default function UserPositions({ positions, activeToken }) {
                   className="w-7 h-7 rounded-full object-cover shrink-0"
                 />
               ) : (
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-500/80 to-amber-500/80 flex items-center justify-center text-[10px] font-bold shrink-0">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#516af6]/80 to-[#a3b1ff]/80 flex items-center justify-center text-[10px] font-bold shrink-0">
                   {pos.symbol.slice(0, 2)}
                 </div>
               )}

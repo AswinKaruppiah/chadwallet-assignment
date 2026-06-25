@@ -42,7 +42,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
                   <Image src={activeToken?.logo} alt={activeToken?.symbol} fill unoptimized className="object-cover" />
                 </Show.If>
                 <Show.Else>
-                  <div className="w-full h-full bg-gradient-to-br from-orange-500/80 to-amber-500/80 flex items-center justify-center font-bold text-[10px]">
+                  <div className="w-full h-full bg-gradient-to-br from-[#516af6]/80 to-[#a3b1ff]/80 flex items-center justify-center font-bold text-[10px]">
                     {activeToken?.symbol?.slice(0, 2)}
                   </div>
                 </Show.Else>
