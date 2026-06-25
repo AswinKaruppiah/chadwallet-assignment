@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useLoginWithOAuth } from '@privy-io/react-auth';
 import { useCreateWallet } from '@privy-io/react-auth/solana';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AppleIcon, GoogleIcon } from '@/utility/icons';
+import { AppleIcon, GoogleIcon, ArrowRightIcon } from '@/utility/icons';
 import { getDisplayName } from '@/utility/helpers';
 import toast from 'react-hot-toast';
 
@@ -147,20 +147,30 @@ export default function LoginModal({ isOpen, onClose }) {
               <div className="flex flex-col gap-3">
                 {/* Apple Login Button */}
                 <button
-                  onClick={handleAppleLogin}
-                  className="w-full bg-white hover:bg-white/95 text-black font-semibold py-3.5 rounded-2xl transition-all text-base flex items-center justify-center gap-2.5 shadow-sm"
+                  onClick={() => toast.error('Apple Login is coming soon!')}
+                  className="group relative w-full bg-white/50 text-black/60 font-bold py-3 rounded-2xl transition-all text-[15px] flex items-center justify-center shadow-sm cursor-not-allowed"
                 >
-                  <AppleIcon size={18} className="!fill-black" />
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                    <AppleIcon size={24} className="!fill-black/60" />
+                  </div>
                   <span>Continue with Apple</span>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-1 group-hover:translate-x-0">
+                    <ArrowRightIcon className="w-5 h-5 !fill-black/60" />
+                  </div>
                 </button>
 
                 {/* Google Login Button */}
                 <button
                   onClick={handleGoogleLogin}
-                  className="w-full bg-black/40 hover:bg-black/60 border border-white/[0.08] hover:border-white/[0.12] text-white font-semibold py-3.5 rounded-2xl transition-all text-base flex items-center justify-center gap-2.5"
+                  className="group relative w-full hover:bg-[#1a1926] border border-white/[0.08] hover:border-white/[0.12] text-white font-bold py-3 rounded-2xl transition-all text-[15px] flex items-center justify-center"
                 >
-                  <GoogleIcon size={18} />
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                    <GoogleIcon size={24} />
+                  </div>
                   <span>Continue with Google</span>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-1 group-hover:translate-x-0">
+                    <ArrowRightIcon className="w-4 h-4 !fill-white" />
+                  </div>
                 </button>
               </div>
 
