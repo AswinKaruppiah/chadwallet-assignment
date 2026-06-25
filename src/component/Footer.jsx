@@ -1,32 +1,63 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const footerLinks = {
+  About: [
+    { label: "Blog", href: "#" },
+    { label: "FAQ", href: "#" },
+    { label: "Affiliates", href: "#" },
+  ],
+  Social: [
+    { label: "Discord", href: "#" },
+    { label: "X/Twitter", href: "https://x.com/chadwallet" },
+    { label: "Instagram", href: "#" },
+    { label: "Youtube", href: "#" },
+    { label: "LinkedIn", href: "#" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
+  ],
+};
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t rounded-t-3xl border-white/5 pt-12 md:pt-16 overflow-hidden flex flex-col justify-between">
-      <div className="max-w-7xl mx-auto w-full px-6 md:px-10 flex flex-col md:flex-row justify-between gap-12 mb-8 md:mb-24">
+    <footer className="w-full flex flex-col">
+      {/* Main Footer Content */}
+      <div className="max-w-screen-2xl mx-auto w-full px-6 md:px-10 pt-8 pb-14 flex flex-col md:flex-row justify-between gap-12">
+
         {/* Left Column — Branding */}
-        <div className="flex flex-col gap-3">
-          <Image
-            src="/assets/logo/light.png"
-            alt="ChadWallet Logo"
-            width={48}
-            height={48}
-            className="object-contain rounded-full mb-4"
-          />
-          <p className="text-base text-white/40 font-medium lowercase">
+        <div className="flex flex-col gap-1">
+          <span className="text-4xl font-bold tracking-tight text-brand-secondary">
+            ChadWallet
+          </span>
+          <p className="text-2xl text-secondary font-medium lowercase mt-1">
             where traders become legends.
           </p>
-          <p className="text-xs text-white/20 mt-2">
+          <p className="text-white/35 mt-4">
             &copy; {new Date().getFullYear()} ChadWallet Inc. All rights reserved.
           </p>
         </div>
-      </div>
 
-      {/* Massive Text at the Bottom */}
-      <div className="w-full flex justify-center items-end px-4 md:px-8 mt-12 lg:mt-28">
-        <h1 className="text-[14vw] font-black tracking-tighter leading-[0.75] uppercase text-center w-full select-none bg-gradient-to-b from-zinc-100/90 via-zinc-600 to-black bg-clip-text text-transparent transform scale-y-[1.8] origin-bottom">
-          CHADWALLET
-        </h1>
+        {/* Right — Link Columns */}
+        <div className="flex gap-16">
+          {Object.entries(footerLinks).map(([section, links]) => (
+            <div key={section} className="flex flex-col gap-3 min-w-[100px]">
+              <p className="text-sm tracking-tight text-white/35 font-mono font-light uppercase mb-1">
+                {section}
+              </p>
+              {links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-white hover:text-white/60 transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
+
       </div>
     </footer>
   );
