@@ -26,7 +26,7 @@ export default function HeroSection() {
         <h1 className="text-6xl sm:text-7xl md:text-[9rem] mb-3 font-extrabold text-brand-secondary tracking-tighter">
           Chadwallet
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-secondary lowercase text-text-secondary">
+        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-secondary lowercase">
           the #1 memecoin trading app.
         </p>
         <p className="text-xl text-[#D1D8FF99] font-medium lowercase max-w-xl mx-auto">

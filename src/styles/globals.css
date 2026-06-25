@@ -30,7 +30,7 @@ body {
 
 /* Custom styles for the video mockup container */
 .section-block {
-  @apply py-10 px-6 md:py-24 md:px-10 max-w-screen-2xl mx-auto w-full;
+  @apply py-10 px-6 md:px-10 max-w-screen-2xl mx-auto w-full;
 }
 
 @keyframes marquee-left {

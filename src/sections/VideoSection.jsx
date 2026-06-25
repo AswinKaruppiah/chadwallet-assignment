@@ -1,8 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { animateFadeYVariants } from "@/utility/animate";
-
 export default function VideoSection() {
   return (
     <section
@@ -11,63 +8,45 @@ export default function VideoSection() {
     >
       <div className="flex flex-col items-center justify-center w-full">
         {/* Section Label */}
-        <motion.p
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={animateFadeYVariants({ delay: 0.2 })}
-          className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-4"
-        >
-          See It in Action
-        </motion.p>
+        <p className="text-brand uppercase font-extrabold mb-4 font-mono text-xs sm:text-sm tracking-widest">
+          NOW AVAILABLE ON WEB
+        </p>
 
         {/* Heading */}
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={animateFadeYVariants({ delay: 0.4 })}
-          className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white text-center mb-10 md:mb-16"
-        >
-          Trade Like a Chad.
-        </motion.h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium text-center mb-4 leading-[1.1]">
+          trade from anywhere.<br />
+          never lose a beat.
+        </h2>
 
-        {/* Desktop Mockup */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={animateFadeYVariants({ delay: 0.6 })}
-          className="relative w-full max-w-5xl"
-        >
+        {/* Subtitle / Paragraph */}
+        <p className="text-secondary opacity-60 text-base sm:text-lg md:text-xl font-medium tracking-tight text-center max-w-2xl mx-auto mb-10 md:mb-16">
+          Open a trade on your phone, close it on your desktop — all in one app.
+        </p>
 
-          {/* Wide ambient glow — orange */}
-          <div className="absolute inset-0 md:-inset-7 bg-orange-500/20 blur-[60px] md:blur-[80px] rounded-full z-0" />
-
-          {/* Tight glow — brighter orange directly behind screen */}
-          <div className="absolute inset-4 bg-orange-400/30 blur-md rounded-2xl z-0" />
-
-          {/* Monitor body — glowing border */}
-          <div className="relative z-10 rounded-2xl p-[1px] bg-gradient-to-b from-white/20 to-white/5 shadow-[0_0_60px_rgba(251,146,60,0.3)]">
-            <div className="bg-[#111111] rounded-2xl p-2">
-              {/* Screen / Video — fixed 16:9 */}
-              <div className="relative overflow-hidden rounded-xl" style={{ aspectRatio: "16/9" }}>
-                <video
-                  src="/assets/video/chadwallet.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-
-                {/* Screen glare overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none z-10" />
-              </div>
-            </div>
+        {/* Desktop & Mobile Mockup Container */}
+        <div className="relative w-full max-w-6xl mx-auto -mt-28 flex flex-col items-center select-none">
+          {/* Desktop Monitor Image */}
+          <div className="relative z-10 w-[92%] md:w-[94%]">
+            <img
+              src="/assets/chadwallet-desktop.webp"
+              alt="ChadWallet Desktop Platform"
+              className="w-full h-auto object-contain"
+            />
           </div>
-        </motion.div>
+
+          {/* Overlapping Mobile Mockup */}
+          <div className="absolute bottom-[2%] right-[-1%] w-[55%] sm:w-[48%] md:w-[44%] max-w-[680px] z-20">
+            <img
+              src="/assets/chadwallet-desktop-phone.webp"
+              alt="ChadWallet Mobile App"
+              className="w-full h-auto object-contain animate-[float_4s_ease-in-out_infinite] drop-shadow-[0_25px_25px_rgba(0,0,0,0.8)]"
+            />
+          </div>
+
+          {/* Bottom Fade Mask */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 md:h-40 bg-gradient-to-t from-[#060510] via-[#060510]/85 to-transparent z-30 pointer-events-none" />
+        </div>
       </div>
-    </section >
+    </section>
   );
 }
