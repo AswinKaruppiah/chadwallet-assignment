@@ -1,48 +1,50 @@
-import Image from "next/image";
-
 export default function FeaturesSection() {
   const features = [
     {
-      category: "KOL Feed",
-      title: "copy-trade profitable key opinion leaders",
-      description: "Track live trades from elite key opinion leaders, view their detailed win rates or PnL history, and copy-trade their strategies in one tap.",
-      imagePath: "/assets/flow/kol-4.png",
-      alt: "KOL Feed Flow",
+      category: "Leaderboard",
+      title: "become a legend, top the leaderboard",
+      imagePath: "/assets/flow/leaderboard.webp",
+      alt: "Leaderboard Flow",
+      cardClassName: "",
+      imageClassName: "",
     },
     {
-      category: "Instant Trading",
-      title: "swap trending tokens in two clicks",
-      description: "Access live price charts, use one-tap quick buy presets, and lock in profits instantly with 20%, 50%, or full position quick-sell controls.",
-      imagePath: "/assets/flow/buy-sell-4.png",
-      alt: "Trading Flow",
+      category: "Social Feed",
+      title: "discover and follow top traders",
+      imagePath: "/assets/flow/social-static.webp",
+      alt: "Social Feed Flow",
+      cardClassName: "",
+      imageClassName: "",
     },
     {
-      category: "Meme Launcher",
-      title: "launch a coin directly from a tweet",
-      description: "Turn any X post into a live token instantly. Auto-fill the name and ticker, buy the initial supply, and deploy it to the market in seconds.",
-      imagePath: "/assets/flow/launch-4.png",
-      alt: "Token Launches Flow",
+      category: "Alerts",
+      title: "real time notifications for what the best are buying",
+      imagePath: "/assets/flow/alerts-static.webp",
+      alt: "Alerts Flow",
+      cardClassName: "",
+      imageClassName: "",
     },
     {
-      category: "X Signals",
-      title: "catch early signals and map holders",
-      description: "Monitor real-time Twitter mentions, check safety stats like developer snipe percentages, and analyze distribution with advanced holder bubblemaps.",
-      imagePath: "/assets/flow/memecoin-4.png",
-      alt: "Memecoin Trading Flow",
+      category: "Apple Pay",
+      title: "deposit instantly with apple pay",
+      imagePath: "/assets/flow/apple-pay-static.webp",
+      alt: "Apple Pay Flow",
+      cardClassName: "",
+      imageClassName: "!object-center",
     },
     {
-      category: "Wallet Management",
-      title: "track assets and fiat onramps",
-      description: "View your net worth timeline, execute seamless token transfers, and deposit or withdraw SOL directly via MoonPay integration.",
-      imagePath: "/assets/flow/portfolio-4.png",
-      alt: "Portfolio Tracking Flow",
+      category: "Assets",
+      title: "track your full portfolio at a glance",
+      imagePath: "/assets/flow/assets-static.webp",
+      alt: "Assets Flow",
+      cardClassName: "",
+      imageClassName: "",
     },
     {
-      category: "Relaunch Protocol",
-      title: "revive dead coins with one button",
-      description: "Redeploy crashed or rugged tokens instantly. Copy their original metadata, set up your initial buy, and start fresh under a new contract.",
-      imagePath: "/assets/flow/relaunch-4.png",
-      alt: "Relaunching Flow",
+      category: "Sign In",
+      title: "get started in seconds, no seed phrase",
+      imagePath: "/assets/flow/sign-in-static.webp",
+      alt: "Sign In Flow",
     },
   ];
 
@@ -62,31 +64,28 @@ export default function FeaturesSection() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {features.map((feature, i) => (
           <div
             key={i}
-            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-3xl min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 shadow-2xl"
+            className={`group flex flex-col bg-subtle border border-white/[0.06] rounded-3xl overflow-hidden ${feature.cardClassName}`}
           >
-            <div className="p-6 md:p-8 pb-0">
-              <span className="text-xs font-bold tracking-widest text-blue-500 uppercase">
+            {/* Card Text */}
+            <div className="p-6 md:p-8 pb-4">
+              <span className="font-mono font-bold tracking-[0.2em] text-brand uppercase">
                 {feature.category}
               </span>
-              <h3 className="text-3xl font-extrabold tracking-tighter text-white lowercase mt-3 mb-2 leading-tight">
+              <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-white lowercase mt-3 leading-snug">
                 {feature.title}
               </h3>
-              <p className="text-sm text-white/40 leading-relaxed mb-6">
-                {feature.description}
-              </p>
             </div>
 
-            {/* Mobile Device Mockup / Image container */}
-            <div className="relative w-full flex-1 min-h-[190px] md:min-h-[280px] mt-auto">
-              <Image
+            {/* Image fills remaining space */}
+            <div class="min-h-0 flex-1 -mt-16">
+              <img
                 src={feature.imagePath}
                 alt={feature.alt}
-                fill
-                className="object-contain object-bottom transition-transform duration-500"
+                className={`h-full w-full object-contain object-bottom transition-transform duration-300 group-hover:scale-105 ${feature.imageClassName}`}
               />
             </div>
           </div>
