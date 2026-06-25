@@ -1,0 +1,158 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { AppleIcon, GooglePlayIcon, ArrowRightIcon, DownloadIcon } from "@/utility/icons";
+
+export default function HeroButtons() {
+  const [showDownloadDropdown, setShowDownloadDropdown] = useState(false);
+  const [hoveredStart, setHoveredStart] = useState(false);
+  const [hoveredDownload, setHoveredDownload] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDownloadDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="flex flex-row items-center justify-center gap-4 mt-6 z-30 relative select-none">
+      {/* Start Trading Button */}
+      <Link
+        href="/trade"
+        onMouseEnter={() => {
+          if (window.matchMedia('(pointer: coarse)').matches) return;
+          setHoveredStart(true);
+        }}
+        onMouseLeave={() => {
+          if (window.matchMedia('(pointer: coarse)').matches) return;
+          setHoveredStart(false);
+        }}
+        onTouchStart={() => setHoveredStart(true)}
+        onTouchEnd={() => setHoveredStart(false)}
+        className="relative h-14 px-8 w-[200px] flex items-center justify-center rounded-xl text-base sm:text-lg font-bold text-white bg-[#606af780] hover:bg-[#606AF7CC] backdrop-blur-md border border-white/5 hover:border-white/10 transition-all shadow-lg active:scale-[0.98] duration-150 cursor-pointer text-center overflow-hidden"
+      >
+        <span className="flex items-center justify-center">
+          <span className="whitespace-nowrap">Start trading</span>
+          <motion.span
+            animate={{
+              width: hoveredStart ? 16 : 0,
+              opacity: hoveredStart ? 1 : 0,
+              marginLeft: hoveredStart ? 8 : 0
+            }}
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            className="overflow-hidden flex items-center justify-center shrink-0"
+          >
+            <motion.span
+              animate={{ x: hoveredStart ? 0 : 16 }}
+              transition={{ duration: 0.15, ease: "easeInOut" }}
+              className="flex items-center shrink-0"
+            >
+              <ArrowRightIcon className="w-4 h-4 mt-[1px]" />
+            </motion.span>
+          </motion.span>
+        </span>
+      </Link>
+
+      {/* Download App Button with Dropdown */}
+      <div
+        className="relative"
+        ref={dropdownRef}
+        onMouseEnter={() => {
+          if (window.matchMedia('(pointer: coarse)').matches) return;
+          setShowDownloadDropdown(true);
+          setHoveredDownload(true);
+        }}
+        onMouseLeave={() => {
+          if (window.matchMedia('(pointer: coarse)').matches) return;
+          setShowDownloadDropdown(false);
+          setHoveredDownload(false);
+        }}
+      >
+        <button
+          onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
+          onTouchStart={() => {
+            setHoveredDownload(true);
+            setShowDownloadDropdown(!showDownloadDropdown);
+          }}
+          onTouchEnd={() => setHoveredDownload(false)}
+          className="relative h-14 px-8 w-[200px] flex items-center justify-center rounded-xl text-base sm:text-lg font-bold text-white bg-white/10 border border-white/10 hover:bg-white/20 backdrop-blur-md transition-all active:scale-[0.98] duration-150 cursor-pointer overflow-hidden"
+        >
+          <span className="flex items-center justify-center">
+            <motion.span
+              animate={{
+                width: hoveredDownload ? 20 : 0,
+                opacity: hoveredDownload ? 1 : 0,
+                marginRight: hoveredDownload ? 8 : 0
+              }}
+              transition={{ duration: 0.15, ease: "easeInOut" }}
+              className="overflow-hidden flex items-center justify-center shrink-0"
+            >
+              <motion.span
+                animate={{
+                  x: hoveredDownload ? 0 : -20,
+                  y: hoveredDownload ? [0, 2, 0] : 0
+                }}
+                transition={{
+                  x: { duration: 0.15, ease: "easeInOut" },
+                  y: { repeat: hoveredDownload ? Infinity : 0, duration: 1.0, ease: "easeInOut" }
+                }}
+                className="flex items-center shrink-0"
+              >
+                <DownloadIcon className="w-5 h-5 text-white" />
+              </motion.span>
+            </motion.span>
+            <span className="whitespace-nowrap">Download app</span>
+          </span>
+        </button>
+
+        <AnimatePresence>
+          {!showDownloadDropdown && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-[115%] w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl z-50 flex flex-col gap-3"
+            >
+              <div className="text-white/40 text-[10px] font-bold uppercase tracking-wider px-1">
+                Select Platform
+              </div>
+              <Link
+                href="https://apps.apple.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+              >
+                <AppleIcon size={24} className="text-white" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Download on the</span>
+                  <span className="text-sm font-bold leading-tight">App Store</span>
+                </div>
+              </Link>
+              <Link
+                href="https://play.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+              >
+                <GooglePlayIcon size={24} className="text-white fill-white" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Get it on</span>
+                  <span className="text-sm font-bold leading-tight">Google Play</span>
+                </div>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
