@@ -6,7 +6,6 @@ import { useCreateWallet } from '@privy-io/react-auth/solana';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppleIcon, GoogleIcon } from '@/utility/icons';
 import { getDisplayName } from '@/utility/helpers';
-import Image from "next/image";
 import toast from 'react-hot-toast';
 
 export default function LoginModal({ isOpen, onClose }) {
@@ -70,6 +69,15 @@ export default function LoginModal({ isOpen, onClose }) {
     }
   };
 
+  const handleAppleLogin = () => {
+    try {
+      initOAuth({ provider: 'apple' });
+    } catch (err) {
+      console.error('Error starting Apple login:', err);
+      setError(err?.message || 'Failed to start Apple login');
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -81,91 +89,88 @@ export default function LoginModal({ isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/70"
         />
 
-        {/* Modal Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: 'spring', duration: 0.4 }}
-          className="relative w-full max-w-md bg-black border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col gap-6 z-10 overflow-hidden"
-        >
-          {/* Dot pattern background */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-20"
-            style={{
-              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-            }}
-          />
+        {/* Modal Wrapper for Close button + Card positioning */}
+        <div className="relative w-full max-w-[350px] z-10 flex flex-col items-center">
 
-          {/* Inner shadow overlay */}
-          <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_80px_rgba(255,255,255,0.15),inset_0_4px_40px_rgba(255,255,255,0.2)]" />
-
-          {/* Subtle center glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_70%)] pointer-events-none" />
-
-          {/* Close Button */}
+          {/* Circular Close Button positioned above the card */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors z-20"
+            className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center rounded-full bg-[#060510]/60 hover:bg-white/5 border border-white/[0.06] backdrop-blur-md transition-all text-white/80 hover:text-white"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
-          {/* Logo & Header */}
-          <div className="flex flex-col items-center gap-2 text-center mt-4 mb-8">
-            <div className="mb-6">
-              <Image
-                src="/assets/logo/light.png"
-                alt="ChadWallet Logo"
-                width={68}
-                height={68}
-                className="object-contain rounded-full"
-              />
-            </div>
-            <h2 className="text-white text-2xl font-black tracking-tight">Welcome to ChadWallet</h2>
-            <p className="text-white/60 text-sm">
-              Login or Sign Up to access your wallet
-            </p>
-          </div>
-
-          {/* Error Banner */}
-          {error && (
+          {/* Modal Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 15 }}
+            transition={{ type: 'spring', duration: 0.4 }}
+            className="relative w-full bg-[#060510]/40 border border-white/5 backdrop-blur-md rounded-3xl p-6 pb-4 flex flex-col gap-12 overflow-hidden shadow-[inset_0_0_50px_rgba(81,106,246,0.05),inset_0_4px_24px_rgba(81,106,246,0.0.5)]"
+          >
+            {/* Inner shadow overlay div with pulse animation */}
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="relative z-10 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs py-3 px-4 rounded-xl font-medium"
-            >
-              {error}
-            </motion.div>
-          )}
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_30px_rgba(81,106,246,0.15),inset_0_4px_24px_rgba(81,106,246,0.25)]"
+            />
 
-          {/* Authentication Container */}
-          <div className="relative z-10 flex flex-col gap-4">
-            {/* Google Login Button */}
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/15 text-white font-bold py-3.5 rounded-2xl transition-all text-sm flex items-center justify-center gap-3"
-            >
-              <GoogleIcon size={20} />
-              Google Login
-            </button>
+            {/* Logo & Header */}
+            <div className="flex flex-col items-center pt-12 text-center gap-4">
+              <span className="text-5xl font-extrabold tracking-tight text-brand-secondary">
+                ChadWallet
+              </span>
+              <h2 className="text-[#9899a3] text-2xl font-medium tracking-tight leading-7">
+                Login or create an <br />
+                account to start trading.
+              </h2>
+            </div>
 
-            {/* Apple Login Button (Disabled) */}
-            <button
-              disabled
-              className="w-full bg-white/5 border border-white/10 text-white/40 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-3 cursor-not-allowed opacity-50 transition-all text-sm"
-            >
-              <AppleIcon size={22} className="!fill-white/40 -mt-1" />
-              <span>Apple Login (Coming Soon)</span>
-            </button>
-          </div>
-        </motion.div>
+            {/* Error Banner */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs py-3 px-4 rounded-xl font-medium text-center"
+              >
+                {error}
+              </motion.div>
+            )}
+
+            {/* Authentication Buttons Container */}
+            <div>
+              <div className="flex flex-col gap-3">
+                {/* Apple Login Button */}
+                <button
+                  onClick={handleAppleLogin}
+                  className="w-full bg-white hover:bg-white/95 text-black font-semibold py-3.5 rounded-2xl transition-all text-base flex items-center justify-center gap-2.5 shadow-sm"
+                >
+                  <AppleIcon size={18} className="!fill-black" />
+                  <span>Continue with Apple</span>
+                </button>
+
+                {/* Google Login Button */}
+                <button
+                  onClick={handleGoogleLogin}
+                  className="w-full bg-black/40 hover:bg-black/60 border border-white/[0.08] hover:border-white/[0.12] text-white font-semibold py-3.5 rounded-2xl transition-all text-base flex items-center justify-center gap-2.5"
+                >
+                  <GoogleIcon size={18} />
+                  <span>Continue with Google</span>
+                </button>
+              </div>
+
+              {/* Terms of Service & Privacy Policy Disclaimer */}
+              <p className="text-white/30 mt-4 text-xs max-w-70 font-normal text-center leading-tight mx-auto">
+                By signing up, you agree to our Terms of Service and Privacy Policy.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </AnimatePresence>
   );
