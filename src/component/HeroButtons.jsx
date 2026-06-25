@@ -122,21 +122,21 @@ export default function HeroButtons() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-72 z-50"
+              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-72 z-50 transform-gpu"
             >
-              <div className="bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl flex flex-col gap-3">
-                <div className="text-white/40 text-[10px] font-bold uppercase tracking-wider px-1">
+              <div className="bg-[#060510]/60 border border-white/5 backdrop-blur-sm rounded-2xl p-4 shadow-2xl overflow-hidden flex flex-col gap-3 transform-gpu">
+                <div className="text-brand-secondary text-[10px] font-bold uppercase tracking-wider px-1">
                   Select Platform
                 </div>
                 <Link
                   href="https://apps.apple.com/us/app/chadwallet/id6757367474"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+                  className="flex items-center gap-3 bg-[#12111a] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] rounded-xl p-3 text-white transition-all cursor-pointer"
                 >
                   <AppleIcon size={24} className="text-white" />
                   <div className="flex flex-col text-left">
-                    <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Download on the</span>
+                    <span className="text-[10px] text-white/60 leading-tight uppercase font-semibold">Download on the</span>
                     <span className="text-sm font-bold leading-tight">App Store</span>
                   </div>
                 </Link>
@@ -144,11 +144,11 @@ export default function HeroButtons() {
                   href="https://play.google.com/store/apps/details?id=xyz.chadwallet.www"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+                  className="flex items-center gap-3 bg-[#12111a] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] rounded-xl p-3 text-white transition-all cursor-pointer"
                 >
                   <GooglePlayIcon size={24} className="text-white fill-white" />
                   <div className="flex flex-col text-left">
-                    <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Get it on</span>
+                    <span className="text-[10px] text-white/60 leading-tight uppercase font-semibold">Get it on</span>
                     <span className="text-sm font-bold leading-tight">Google Play</span>
                   </div>
                 </Link>
