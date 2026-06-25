@@ -114,41 +114,43 @@ export default function HeroButtons() {
         </button>
 
         <AnimatePresence>
-          {!showDownloadDropdown && (
+          {showDownloadDropdown && (
             <motion.div
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-[115%] w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl z-50 flex flex-col gap-3"
+              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-72 z-50"
             >
-              <div className="text-white/40 text-[10px] font-bold uppercase tracking-wider px-1">
-                Select Platform
+              <div className="bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl flex flex-col gap-3">
+                <div className="text-white/40 text-[10px] font-bold uppercase tracking-wider px-1">
+                  Select Platform
+                </div>
+                <Link
+                  href="https://apps.apple.com/us/app/chadwallet/id6757367474"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+                >
+                  <AppleIcon size={24} className="text-white" />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Download on the</span>
+                    <span className="text-sm font-bold leading-tight">App Store</span>
+                  </div>
+                </Link>
+                <Link
+                  href="https://play.google.com/store/apps/details?id=xyz.chadwallet.www"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
+                >
+                  <GooglePlayIcon size={24} className="text-white fill-white" />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Get it on</span>
+                    <span className="text-sm font-bold leading-tight">Google Play</span>
+                  </div>
+                </Link>
               </div>
-              <Link
-                href="https://apps.apple.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
-              >
-                <AppleIcon size={24} className="text-white" />
-                <div className="flex flex-col text-left">
-                  <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Download on the</span>
-                  <span className="text-sm font-bold leading-tight">App Store</span>
-                </div>
-              </Link>
-              <Link
-                href="https://play.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3 text-white transition-all cursor-pointer"
-              >
-                <GooglePlayIcon size={24} className="text-white fill-white" />
-                <div className="flex flex-col text-left">
-                  <span className="text-[10px] text-white/50 leading-tight uppercase font-medium">Get it on</span>
-                  <span className="text-sm font-bold leading-tight">Google Play</span>
-                </div>
-              </Link>
             </motion.div>
           )}
         </AnimatePresence>
