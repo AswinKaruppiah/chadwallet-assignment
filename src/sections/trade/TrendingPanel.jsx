@@ -84,11 +84,11 @@ export default function TrendingPanel({
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-semibold text-sm tracking-tight text-white/95">
+                        <span className="font-semibold text-sm tracking-tight text-white/95 truncate">
                           {token.symbol}
                         </span>
                         <span
-                          className={`inline-flex items-center gap-0.5 text-[10px] font-semibold px-1.5 py-0.5 rounded-full tabular-nums ${isPositive
+                          className={`inline-flex items-center gap-0.5 text-[10px] font-semibold px-1.5 py-0.5 rounded-full tabular-nums shrink-0 ${isPositive
                             ? "text-emerald-400 bg-emerald-500/10"
                             : "text-red-400 bg-red-500/10"
                             }`}

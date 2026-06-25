@@ -70,22 +70,19 @@ export default function TopBar() {
   const walletAddress = user?.wallets?.find(w => w.chainType === 'solana')?.address || user?.wallet?.address;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="relative z-30 flex items-center justify-between py-4"
+    <div
+      className="relative z-30 flex items-center justify-between py-2"
     >
 
       {/* Left — Logo + Brand */}
       <Link href="/">
-        <h2 className="font-black text-lg hover:opacity-80 transition-opacity cursor-pointer">
+        <h2 className="font-black text-lg hover:opacity-80 text-brand-secondary transition-opacity cursor-pointer">
           ChadWallet
         </h2>
       </Link>
 
       {/* Right — Store Badges + Login */}
-      <div className="flex items-center gap-3 relative" ref={dropdownRef}>
+      <motion.div layout className="flex items-center gap-3 relative" ref={dropdownRef}>
 
         <StoreBadges className="hidden md:flex" />
 
@@ -239,9 +236,9 @@ export default function TopBar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
-    </motion.div>
+    </div>
   );
 }

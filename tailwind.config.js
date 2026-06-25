@@ -13,9 +13,15 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        brand: "var(--brand)",
+        secondary: "var(--text-secondary)",
+        "brand-secondary": "var(--brand-secondary)",
       },
       backgroundImage: {
         "hero": "url('/assets/hero-bg.png')",
+      },
+      fontFamily: {
+        sans: ["var(--font-aeonik)", "system-ui", "sans-serif"],
       },
     },
   },

@@ -3,15 +3,40 @@ import "./globals.css";
 import Providers from "./providers";
 import NextTopLoader from "nextjs-toploader";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const aeonik = localFont({
+  src: [
+    {
+      path: "./fonts/Aeonik-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Aeonik-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Aeonik-Medium.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Aeonik-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Aeonik-Bold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Aeonik-Bold.ttf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-aeonik",
 });
 
 export const metadata = {
@@ -58,7 +83,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${aeonik.variable} antialiased`}
       >
         <NextTopLoader
           color="#f97316"
