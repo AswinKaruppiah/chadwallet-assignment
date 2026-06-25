@@ -22,8 +22,8 @@ export default function HeroSection() {
       < TopBar />
 
       {/* Content */}
-      <div className="relative z-20 h-full flex flex-col justify-center items-center pt-10 px-6 text-center gap-2" >
-        <h1 className="text-6xl sm:text-7xl md:text-[9rem] mb-4 font-extrabold text-brand-secondary tracking-tighter">
+      <div className="relative z-20 h-full flex flex-col justify-center items-center pt-12 px-6 text-center gap-2" >
+        <h1 className="text-6xl sm:text-7xl md:text-[9rem] mb-3 font-extrabold text-brand-secondary tracking-tighter">
           Chadwallet
         </h1>
         <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-secondary lowercase text-text-secondary">
