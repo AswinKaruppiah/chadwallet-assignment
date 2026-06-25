@@ -92,7 +92,7 @@ export default function TopBar() {
             <Show.If isTrue={isProcessingOAuth && !authenticated}>
               <button
                 disabled
-                className="flex items-center gap-2.5 backdrop-blur-lg bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-white/60 font-semibold text-sm cursor-wait transition-all"
+                className="flex items-center gap-2.5 bg-subtle ring-1 ring-brand-dim h-10 px-5 rounded-lg font-bold text-white/60 text-sm cursor-wait transition-all animate-pulse"
               >
                 <div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin shrink-0" />
                 <span>Logging in...</span>
@@ -102,9 +102,9 @@ export default function TopBar() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="flex items-center gap-2.5 backdrop-blur-lg bg-white/10 hover:bg-white/15 border border-white/10 rounded-full pl-1 pr-4 py-1 text-white font-semibold text-sm transition-all"
+                  className="flex items-center gap-2.5 bg-subtle ring-1 ring-brand-dim hover:bg-opacity-80 h-10 pl-1 pr-4 rounded-full font-bold text-white text-sm transition-all"
                 >
-                  <div className="aspect-square w-8 shrink-0 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 text-black font-black text-xs flex items-center justify-center">
+                  <div className="aspect-square w-8 shrink-0 rounded-full bg-gradient-to-tr from-brand to-brand-secondary text-[#060510] font-black text-xs flex items-center justify-center">
                     {String(name || "T").charAt(0).toUpperCase()}
                   </div>
                   <span className="max-w-[100px] truncate">{name}</span>
