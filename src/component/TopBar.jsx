@@ -9,7 +9,6 @@ import { truncateAddress } from "@/utility/helpers";
 import LoginModal from "@/component/LoginModal";
 import Show from "@/component/Show";
 import { AnimatePresence, motion } from "framer-motion";
-import toast from 'react-hot-toast';
 
 export default function TopBar() {
   const { logout, authenticated, user, ready } = usePrivy();
@@ -133,11 +132,11 @@ export default function TopBar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute right-0 top-[110%] w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-5 shadow-2xl backdrop-blur-xl z-50 flex flex-col gap-4"
+              className="absolute right-0 top-[110%] w-72 bg-[#12111a] border border-white/10 rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.6)] z-50 flex flex-col gap-4"
             >
               {/* Header / User Info */}
               <div className="flex flex-col gap-1 border-b border-white/5 pb-3">
-                <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Account</span>
+                <span className="text-[#a3b1ff]/50 text-[10px] font-bold uppercase tracking-wider">Account</span>
                 <span className="text-white font-extrabold text-base leading-tight truncate">{name}</span>
                 <Show>
                   <Show.If isTrue={!!email}>
@@ -149,10 +148,10 @@ export default function TopBar() {
               {/* Wallet Section */}
               <Show>
                 <Show.If isTrue={!!walletAddress}>
-                  <div className="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
-                    <span className="text-white/40 text-[10px] font-bold uppercase tracking-wider">Solana Wallet</span>
+                  <div className="bg-white/[0.03] border border-white/[0.05] rounded-xl p-3 flex flex-col gap-1.5">
+                    <span className="text-[#a3b1ff]/50 text-[10px] font-bold uppercase tracking-wider">Solana Wallet</span>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-white font-mono text-xs font-semibold">{truncateAddress(walletAddress)}</span>
+                      <span className="text-white/80 font-mono text-xs font-semibold">{truncateAddress(walletAddress)}</span>
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(walletAddress);
@@ -164,7 +163,7 @@ export default function TopBar() {
                       >
                         <Show>
                           <Show.If isTrue={copied}>
-                            <span className="text-brand font-bold text-[10px] uppercase">Copied!</span>
+                            <span className="text-[#516af6] font-bold text-[10px] uppercase">Copied!</span>
                           </Show.If>
                           <Show.Else>
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
