@@ -42,6 +42,8 @@ export default function HeroButtons() {
         <span className="flex items-center justify-center">
           <span className="whitespace-nowrap">Start trading</span>
           <motion.span
+            initial={{ width: 0, opacity: 0, marginLeft: 0 }}
+            style={{ width: 0, opacity: 0, marginLeft: 0 }}
             animate={{
               width: hoveredStart ? 16 : 0,
               opacity: hoveredStart ? 1 : 0,
@@ -51,6 +53,7 @@ export default function HeroButtons() {
             className="overflow-hidden flex items-center justify-center shrink-0"
           >
             <motion.span
+              initial={{ x: 16 }}
               animate={{ x: hoveredStart ? 0 : 16 }}
               transition={{ duration: 0.15, ease: "easeInOut" }}
               className="flex items-center shrink-0"
@@ -87,6 +90,8 @@ export default function HeroButtons() {
         >
           <span className="flex items-center justify-center">
             <motion.span
+              initial={{ width: 0, opacity: 0, marginRight: 0 }}
+              style={{ width: 0, opacity: 0, marginRight: 0 }}
               animate={{
                 width: hoveredDownload ? 20 : 0,
                 opacity: hoveredDownload ? 1 : 0,
@@ -96,14 +101,11 @@ export default function HeroButtons() {
               className="overflow-hidden flex items-center justify-center shrink-0"
             >
               <motion.span
+                initial={{ x: -20 }}
                 animate={{
-                  x: hoveredDownload ? 0 : -20,
-                  y: hoveredDownload ? [0, 2, 0] : 0
+                  x: hoveredDownload ? 0 : -20
                 }}
-                transition={{
-                  x: { duration: 0.15, ease: "easeInOut" },
-                  y: { repeat: hoveredDownload ? Infinity : 0, duration: 1.0, ease: "easeInOut" }
-                }}
+                transition={{ duration: 0.15, ease: "easeInOut" }}
                 className="flex items-center shrink-0"
               >
                 <DownloadIcon className="w-5 h-5 text-white" />
