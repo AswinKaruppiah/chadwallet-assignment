@@ -68,13 +68,13 @@ export default function LiveTrades({ activeToken }) {
 
   return (
     <table className="w-full text-left text-xs border-collapse">
-      <thead className="sticky top-0 bg-[#060510]/80 backdrop-blur-md z-10 border-b border-white/5">
+      <thead className="sticky top-0 bg-white/[0.03] backdrop-blur-md z-10 border-b border-white/5">
         <tr>
-          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Time</th>
-          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3">Type</th>
-          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Price</th>
-          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Amount ({activeToken?.symbol || "Token"})</th>
-          <th className="font-bold text-[10px] uppercase tracking-wider text-white/35 px-4 py-3 text-right">Total (USD)</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-[#a3b1ff]/70 px-4 py-2.5">Time</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-[#a3b1ff]/70 px-4 py-2.5">Type</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-[#a3b1ff]/70 px-4 py-2.5 text-right">Price</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-[#a3b1ff]/70 px-4 py-2.5 text-right">Amount ({activeToken?.symbol || "Token"})</th>
+          <th className="font-bold text-[10px] uppercase tracking-wider text-[#a3b1ff]/70 px-4 py-2.5 text-right">Total (USD)</th>
         </tr>
       </thead>
       <tbody className="font-mono divide-y divide-white/[0.02]">
