@@ -31,7 +31,7 @@ function TokenCard({ token, onClick, onHover }) {
             <Image src={token.image} alt={token.symbol} fill unoptimized className="object-cover" />
           </Show.If>
           <Show.Else>
-            <div className="w-full h-full flex items-center justify-center font-bold text-[10px] bg-gradient-to-br from-orange-500/80 to-amber-500/80 rounded-full">
+            <div className="w-full h-full flex items-center justify-center font-bold text-[10px] bg-gradient-to-br from-[#516af6]/80 to-[#a3b1ff]/80 rounded-full">
               {token.symbol?.slice(0, 2)}
             </div>
           </Show.Else>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLoginWithOAuth } from '@privy-io/react-auth';
 import { useCreateWallet } from '@privy-io/react-auth/solana';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,7 +9,6 @@ import { getDisplayName } from '@/utility/helpers';
 import toast from 'react-hot-toast';
 
 export default function LoginModal({ isOpen, onClose }) {
-  const [error, setError] = useState('');
   const { createWallet } = useCreateWallet();
 
   const { initOAuth } = useLoginWithOAuth({
@@ -37,16 +36,9 @@ export default function LoginModal({ isOpen, onClose }) {
     },
     onError: (err) => {
       console.error('Login failed', err);
-      setError(err?.message || 'Login failed');
+      toast.error(err?.message || 'Login failed');
     }
   });
-
-  // Reset local error when modal closes/opens
-  useEffect(() => {
-    if (!isOpen) {
-      setError('');
-    }
-  }, [isOpen]);
 
   // Disable background scroll when modal is open
   useEffect(() => {
@@ -65,7 +57,7 @@ export default function LoginModal({ isOpen, onClose }) {
       initOAuth({ provider: 'google' });
     } catch (err) {
       console.error('Error starting Google login:', err);
-      setError(err?.message || 'Failed to start Google login');
+      toast.error(err?.message || 'Failed to start Google login');
     }
   };
 
@@ -74,7 +66,7 @@ export default function LoginModal({ isOpen, onClose }) {
       initOAuth({ provider: 'apple' });
     } catch (err) {
       console.error('Error starting Apple login:', err);
-      setError(err?.message || 'Failed to start Apple login');
+      toast.error(err?.message || 'Failed to start Apple login');
     }
   };
 
@@ -130,17 +122,6 @@ export default function LoginModal({ isOpen, onClose }) {
                 account to start trading.
               </h2>
             </div>
-
-            {/* Error Banner */}
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs py-3 px-4 rounded-xl font-medium text-center"
-              >
-                {error}
-              </motion.div>
-            )}
 
             {/* Authentication Buttons Container */}
             <div>
