@@ -9,6 +9,7 @@ import { truncateAddress } from "@/utility/helpers";
 import LoginModal from "@/component/LoginModal";
 import Show from "@/component/Show";
 import { AnimatePresence, motion } from "framer-motion";
+import toast from 'react-hot-toast';
 
 export default function TopBar() {
   const { logout, authenticated, user, ready } = usePrivy();
@@ -85,7 +86,6 @@ export default function TopBar() {
       <motion.div layout="position" className="flex items-center gap-3 relative" ref={dropdownRef}>
 
         <StoreBadges className="hidden md:flex" />
-
         {/* Login / Profile Button */}
         {mounted && (
           <Show>
@@ -164,7 +164,7 @@ export default function TopBar() {
                       >
                         <Show>
                           <Show.If isTrue={copied}>
-                            <span className="text-orange-400 font-bold text-[10px] uppercase">Copied!</span>
+                            <span className="text-brand font-bold text-[10px] uppercase">Copied!</span>
                           </Show.If>
                           <Show.Else>
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -189,11 +189,11 @@ export default function TopBar() {
                       }
                     }}
                     disabled={isCreatingWallet}
-                    className="w-full bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold py-2.5 rounded-xl border border-orange-500/15 hover:border-orange-500/30 transition-all text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#516af6]/10 hover:bg-[#516af6]/20 text-[#516af6] font-bold py-2.5 rounded-xl border border-[#516af6]/15 hover:border-[#516af6]/30 transition-all text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Show>
                       <Show.If isTrue={isCreatingWallet}>
-                        <div className="w-3.5 h-3.5 border-2 border-orange-400/20 border-t-orange-400 rounded-full animate-spin shrink-0" />
+                        <div className="w-3.5 h-3.5 border-2 border-[#516af6]/20 border-t-[#516af6] rounded-full animate-spin shrink-0" />
                         <span>Creating wallet...</span>
                       </Show.If>
                       <Show.Else>

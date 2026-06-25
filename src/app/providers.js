@@ -37,16 +37,18 @@ export default function Providers({ children }) {
         position="bottom-center"
         toastOptions={{
           style: {
-            background: '#1a1a1a',
+            background: 'rgba(12, 17, 40, 0.4)',
             color: '#fff',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(81, 106, 246, 0.2)',
             borderRadius: '50px',
             fontSize: '14px',
             fontWeight: '600',
+            backdropFilter: 'blur(30px)',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
           },
           success: {
             iconTheme: {
-              primary: '#fb923c',
+              primary: '#516af6',
               secondary: '#1a1a1a',
             },
           },

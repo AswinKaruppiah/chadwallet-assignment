@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
         className={`${aeonik.variable} antialiased`}
       >
         <NextTopLoader
-          color="#f97316"
+          color="#516af6"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}
@@ -94,7 +94,7 @@ export default function RootLayout({ children }) {
           showSpinner={false}
           easing="ease"
           speed={200}
-          shadow="0 0 10px #f97316,0 0 5px #f97316"
+          shadow="0 0 10px #516af6,0 0 5px #516af6"
         />
         <Providers>
           {children}
