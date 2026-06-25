@@ -18,8 +18,8 @@ export default function HeroButtons() {
         setShowDownloadDropdown(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handleClickOutside);
+    return () => document.removeEventListener("pointerdown", handleClickOutside);
   }, []);
 
   return (
@@ -70,22 +70,15 @@ export default function HeroButtons() {
         ref={dropdownRef}
         onMouseEnter={() => {
           if (window.matchMedia('(pointer: coarse)').matches) return;
-          setShowDownloadDropdown(true);
           setHoveredDownload(true);
         }}
         onMouseLeave={() => {
           if (window.matchMedia('(pointer: coarse)').matches) return;
-          setShowDownloadDropdown(false);
           setHoveredDownload(false);
         }}
       >
         <button
           onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
-          onTouchStart={() => {
-            setHoveredDownload(true);
-            setShowDownloadDropdown(!showDownloadDropdown);
-          }}
-          onTouchEnd={() => setHoveredDownload(false)}
           className="relative h-14 px-8 w-[200px] flex items-center justify-center rounded-xl text-base sm:text-lg font-bold text-white bg-white/10 border border-white/10 hover:bg-white/20 backdrop-blur-md transition-all active:scale-[0.98] duration-150 cursor-pointer overflow-hidden"
         >
           <span className="flex items-center justify-center">
@@ -93,9 +86,9 @@ export default function HeroButtons() {
               initial={{ width: 0, opacity: 0, marginRight: 0 }}
               style={{ width: 0, opacity: 0, marginRight: 0 }}
               animate={{
-                width: hoveredDownload ? 20 : 0,
-                opacity: hoveredDownload ? 1 : 0,
-                marginRight: hoveredDownload ? 8 : 0
+                width: (hoveredDownload || showDownloadDropdown) ? 20 : 0,
+                opacity: (hoveredDownload || showDownloadDropdown) ? 1 : 0,
+                marginRight: (hoveredDownload || showDownloadDropdown) ? 8 : 0
               }}
               transition={{ duration: 0.15, ease: "easeInOut" }}
               className="overflow-hidden flex items-center justify-center shrink-0"
@@ -103,7 +96,7 @@ export default function HeroButtons() {
               <motion.span
                 initial={{ x: -20 }}
                 animate={{
-                  x: hoveredDownload ? 0 : -20
+                  x: (hoveredDownload || showDownloadDropdown) ? 0 : -20
                 }}
                 transition={{ duration: 0.15, ease: "easeInOut" }}
                 className="flex items-center shrink-0"
