@@ -56,7 +56,7 @@ export default function FeaturesSection() {
         <h2 className="text-4xl md:text-6xl font-medium tracking-tighter lowercase">
           never miss out again
         </h2>
-        <p className="text-lg md:text-3xl text-secondary opacity-60 tracking-tight lowercase mt-2">
+        <p className="text-lg md:text-3xl text-secondary font-medium tracking-tight lowercase mt-2">
           the only social-first trading app
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function FeaturesSection() {
         {features.map((feature, i) => (
           <div
             key={i}
-            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-[32px] min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 shadow-2xl"
+            className="flex flex-col justify-between bg-gradient-to-b from-[#0a0a0a] to-[#1f1f1f] rounded-3xl min-h-[420px] md:min-h-[500px] overflow-hidden group hover:border-white/10 shadow-2xl"
           >
             <div className="p-6 md:p-8 pb-0">
               <span className="text-xs font-bold tracking-widest text-blue-500 uppercase">

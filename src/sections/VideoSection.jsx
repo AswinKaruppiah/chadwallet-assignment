@@ -17,7 +17,7 @@ export default function VideoSection() {
         </h2>
 
         {/* Subtitle / Paragraph */}
-        <p className="text-secondary opacity-60 text-base sm:text-lg md:text-xl font-medium tracking-tight text-center max-w-2xl mx-auto mb-10 md:mb-16">
+        <p className="text-secondary text-base sm:text-lg md:text-xl font-medium tracking-tight text-center max-w-2xl mx-auto mb-10 md:mb-16">
           Open a trade on your phone, close it on your desktop — all in one app.
         </p>
 
