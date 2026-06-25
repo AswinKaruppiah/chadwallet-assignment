@@ -16,7 +16,7 @@ export default function StoreBadges({ className = "" }) {
         <AppleIcon size={24} className="fill-white" />
         <div className="flex flex-col text-left leading-[1.1]">
           <span className="text-white/80 text-[9px] font-normal tracking-tight">Download on the</span>
-          <span className="text-white text-base font-medium -mt-1">App Store</span>
+          <span className="text-white text-base -mt-1">App Store</span>
         </div>
       </Link>
 
@@ -30,7 +30,7 @@ export default function StoreBadges({ className = "" }) {
         <GooglePlayIcon size={22} />
         <div className="flex flex-col text-left leading-[1.1]">
           <span className="text-white/80 text-[9px] font-normal tracking-tight">GET IT ON</span>
-          <span className="text-white text-base font-medium -mt-1">Google Play</span>
+          <span className="text-white text-base -mt-1">Google Play</span>
         </div>
       </Link>
     </div >
