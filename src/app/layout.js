@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import "./globals.css";
+import "../styles/globals.css";
 import Providers from "./providers";
 import NextTopLoader from "nextjs-toploader";
 

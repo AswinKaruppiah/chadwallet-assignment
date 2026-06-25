@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "@/component/TopBar";
 import Link from "next/link";
@@ -14,29 +13,27 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen select-none text-white px-4 overflow-hidden"
+      className="relative select-none text-white px-4 isolate flex flex-col min-h-svh overflow-x-hidden"
     >
-      {/* Background Image */}
-      <Image
+      <img
         src="/hero/hero-bg.webp"
         alt="Hero Background"
-        fill
-        priority
-        className="object-cover object-center pointer-events-none"
+        className="absolute top-0 left-0 w-full -z-10 pointer-events-none select-none"
+        fetchPriority="high"
       />
 
       {/* Top Bar */}
-      <TopBar />
+      < TopBar />
 
       {/* Content */}
-      <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
-        <h1 className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
+      < div className="relative z-20 h-full flex flex-col justify-center items-center pt-10 px-6 text-center gap-2" >
+        <h1 className="text-6xl sm:text-7xl md:text-[9rem] mb-4 font-extrabold text-brand-secondary tracking-tighter">
           Chadwallet
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
+        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-secondary lowercase text-text-secondary">
           the #1 memecoin trading app.
         </p>
-        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
+        <p className="text-xl text-[#D1D8FF99] font-medium lowercase max-w-xl mx-auto">
           social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
         </p>
 
@@ -80,7 +77,13 @@ export default function HeroSection() {
         <div>
           <StoreBadges className="flex md:hidden mt-8 gap-3" />
         </div>
-      </div>
-    </section>
+        <img
+          alt="Astronaut"
+          className="hidden desktop:block h-[520px] -mt-20 object-contain animate-[float_4s_ease-in-out_infinite]"
+          fetchPriority="high"
+          src="/hero/astronaut.webp"
+        />
+      </div >
+    </section >
   );
 }

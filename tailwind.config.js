@@ -22,6 +22,12 @@ module.exports = {
       backgroundImage: {
         "hero": "url('/assets/hero-bg.png')",
       },
+      screens: {
+        desktop: "1024px",
+      },
+      spacing: {
+        130: "32.5rem",
+      },
       fontFamily: {
         sans: ["var(--font-aeonik)", "system-ui", "sans-serif"],
       },

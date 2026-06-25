@@ -6,7 +6,7 @@
   --background: #060510;
   --foreground: #f7f7f7;
   --brand: #516af6;
-  --text-secondary: #EAEDFF99;
+  --text-secondary: #eaedff;
   --brand-secondary: #CBD0EB;
   --bg-subtle: #12111a;
   --brand-dim: #cbd0eb1a;
@@ -41,6 +41,11 @@ body {
 @keyframes marquee-right {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 /* Hide spin buttons for input type="number" */
