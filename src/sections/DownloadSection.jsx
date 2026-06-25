@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -10,7 +8,7 @@ export default function DownloadSection() {
   return (
     <section className="section-block !pb-14 !max-w-7xl mx-auto">
       {/* Outer Banner Card */}
-      <motion.div 
+      <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
@@ -34,7 +32,7 @@ export default function DownloadSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_70%)] pointer-events-none" />
 
         {/* Brand App Icon Container */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -51,7 +49,7 @@ export default function DownloadSection() {
         </motion.div>
 
         {/* Card Title */}
-        <motion.h2 
+        <motion.h2
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -62,7 +60,7 @@ export default function DownloadSection() {
         </motion.h2>
 
         {/* Overview */}
-        <motion.p 
+        <motion.p
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -74,7 +72,7 @@ export default function DownloadSection() {
         </motion.p>
 
         {/* Buttons / Badges Container */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}

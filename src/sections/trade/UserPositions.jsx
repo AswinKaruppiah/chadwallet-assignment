@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { formatPrice, formatAmount } from "@/utility/helper";
 
@@ -48,9 +46,8 @@ export default function UserPositions({ positions, activeToken }) {
               <div className="text-xs font-semibold text-white font-mono">
                 ${formatPrice(pos.valueUsd)}
               </div>
-              <div className={`text-[10px] font-mono mt-0.5 font-medium ${
-                pos.isProfit ? "text-green-400" : "text-red-400"
-              }`}>
+              <div className={`text-[10px] font-mono mt-0.5 font-medium ${pos.isProfit ? "text-green-400" : "text-red-400"
+                }`}>
                 {pos.isProfit ? "+" : ""}${pos.pnlUsd.toFixed(2)} ({pos.isProfit ? "+" : ""}{pos.pnlPercent.toFixed(2)}%)
               </div>
             </div>

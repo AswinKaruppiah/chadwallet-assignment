@@ -1,5 +1,3 @@
-"use client";
-
 import TopBar from "@/component/TopBar";
 import StoreBadges from "@/component/StoreBadges";
 import HeroButtons from "@/component/HeroButtons";
