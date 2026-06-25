@@ -7,7 +7,6 @@ import TopBar from "@/component/TopBar";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/utility/icons";
 import StoreBadges from "@/component/StoreBadges";
-import { animateFadeYVariants } from "@/utility/animate";
 
 export default function HeroSection() {
   const [hovered, setHovered] = useState(false);
@@ -15,7 +14,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen select-none text-white px-6 md:px-10 overflow-hidden"
+      className="relative min-h-screen select-none text-white px-4 overflow-hidden"
     >
       {/* Background Image */}
       <Image
@@ -31,21 +30,18 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center items-center pt-24 text-center gap-2">
-        <motion.h1 initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.2 })} className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
+        <h1 className="text-6xl sm:text-7xl md:text-9xl mb-4 font-extrabold tracking-tighter lowercase">
           Chadwallet
-        </motion.h1>
-        <motion.p initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.4 })} className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
+        </h1>
+        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter lowercase text-white">
           the #1 memecoin trading app.
-        </motion.p>
-        <motion.p initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 0.6 })} className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
+        </p>
+        <p className="text-sm sm:text-base md:text-lg text-white/60 font-medium lowercase max-w-xl mx-auto">
           social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
-        </motion.p>
+        </p>
 
         <Link href="/trade" passHref legacyBehavior>
-          <motion.a
-            initial="hidden"
-            animate="visible"
-            variants={animateFadeYVariants({ delay: 0.7 })}
+          <a
             onMouseEnter={() => {
               if (window.matchMedia('(pointer: coarse)').matches) return;
               setHovered(true);
@@ -79,11 +75,11 @@ export default function HeroSection() {
                 </motion.span>
               )}
             </AnimatePresence>
-          </motion.a>
+          </a>
         </Link>
-        <motion.div initial="hidden" animate="visible" variants={animateFadeYVariants({ delay: 1.0 })}>
+        <div>
           <StoreBadges className="flex md:hidden mt-8 gap-3" />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

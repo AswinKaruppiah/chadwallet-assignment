@@ -11,7 +11,7 @@ export default function StoreBadges({ className = "" }) {
         href="https://apps.apple.com/us/app/chadwallet/id6757367474"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 bg-white/20 backdrop-blur-md rounded-md px-3.5 py-1.5 hover:ring-white/40 hover:ring-1 hover:backdrop-blur-sm hover:opacity-90 transition-all select-none"
+        className="flex items-center gap-1.5 bg-white/20 backdrop-blur-md rounded-md px-3.5 py-1.5 hover:ring-white/40 hover:ring-1 hover:backdrop-blur-sm hover:opacity-90 transition-all select-none"
       >
         <AppleIcon size={24} className="fill-white" />
         <div className="flex flex-col text-left leading-[1.1]">
@@ -25,7 +25,7 @@ export default function StoreBadges({ className = "" }) {
         href="https://play.google.com/store/apps/details?id=xyz.chadwallet.www"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 bg-white/20 backdrop-blur-md rounded-md px-3.5 py-1.5 hover:ring-white/40 hover:ring-1 hover:backdrop-blur-sm hover:opacity-90 transition-all select-none"
+        className="flex items-center gap-1.5 bg-white/20 backdrop-blur-md rounded-md px-3.5 py-1.5 hover:ring-white/40 hover:ring-1 hover:backdrop-blur-sm hover:opacity-90 transition-all select-none"
       >
         <GooglePlayIcon size={22} />
         <div className="flex flex-col text-left leading-[1.1]">

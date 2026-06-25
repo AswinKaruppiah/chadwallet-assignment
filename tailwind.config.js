@@ -16,6 +16,8 @@ module.exports = {
         brand: "var(--brand)",
         secondary: "var(--text-secondary)",
         "brand-secondary": "var(--brand-secondary)",
+        subtle: "var(--bg-subtle)",
+        "brand-dim": "var(--brand-dim)",
       },
       backgroundImage: {
         "hero": "url('/assets/hero-bg.png')",

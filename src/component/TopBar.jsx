@@ -82,7 +82,7 @@ export default function TopBar() {
       </Link>
 
       {/* Right — Store Badges + Login */}
-      <motion.div layout className="flex items-center gap-3 relative" ref={dropdownRef}>
+      <motion.div layout="position" className="flex items-center gap-3 relative" ref={dropdownRef}>
 
         <StoreBadges className="hidden md:flex" />
 
@@ -117,7 +117,7 @@ export default function TopBar() {
             <Show.ElseIf isTrue={ready && !authenticated}>
               <button
                 onClick={() => setShowLoginModal(true)}
-                className="bg-white text-black text-sm font-bold px-5 py-2 rounded-full hover:bg-white/90 transition-all"
+                className="bg-subtle ring-1 ring-brand-dim hover:bg-opacity-80 h-10 px-5 rounded-lg font-bold text-white text-sm transition-all"
               >
                 Login
               </button>
