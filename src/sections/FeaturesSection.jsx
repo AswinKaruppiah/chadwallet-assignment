@@ -81,7 +81,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Image fills remaining space */}
-            <div class="min-h-0 flex-1 -mt-16">
+            <div className="min-h-0 flex-1 -mt-16">
               <img
                 src={feature.imagePath}
                 alt={feature.alt}

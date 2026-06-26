@@ -33,7 +33,7 @@ export default function VideoSection() {
           </div>
 
           {/* Overlapping Mobile Mockup */}
-          <div className="absolute bottom-[2%] right-[-1%] w-[55%] sm:w-[48%] md:w-[44%] max-w-[680px] z-20">
+          <div className="absolute bottom-[10%] right-[-9%] w-[55%] sm:w-[48%] md:w-[44%] max-w-[680px] z-20">
             <img
               src="/assets/chadwallet-desktop-phone.webp"
               alt="ChadWallet Mobile App"
