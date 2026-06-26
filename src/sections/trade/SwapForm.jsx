@@ -41,7 +41,7 @@ export default function SwapForm({ activeToken, loading, solPrice, solPriceLoadi
   return (
     <>
       {/* Header */}
-      <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
+      <div className="px-4 py-3 border-b bg-white/5 border-white/5 flex items-center justify-between">
         <h2 className="text-[13px] font-semibold tracking-tight">Swap</h2>
         <Show>
           <Show.If isTrue={solPriceLoading || loading}>

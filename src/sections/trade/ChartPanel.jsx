@@ -20,20 +20,20 @@ export default function ChartPanel({ activeToken, loading, className = "" }) {
   }, [activeToken]);
 
   return (
-    <div className={`flex-1 flex-col border-r border-white/5 relative overflow-y-auto ${className}`}>
+    <div className={`flex-1 flex-col relative overflow-y-auto ${className}`}>
       <TokenInfoHeader activeToken={activeToken} loading={loading} />
 
       {/* Chart Area */}
-      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-[#060510]">
+      <div className="h-[400px] min-h-[400px] max-h-[400px] w-full relative bg-background">
         <Show>
           <Show.If isTrue={loading || !activeToken}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#060510]">
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-background">
               <div className="w-8 h-8 border-2 border-[#516af6]/30 border-t-[#516af6] rounded-full animate-spin" />
               Scanning networks...
             </div>
           </Show.If>
           <Show.ElseIf isTrue={!chartLoaded}>
-            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-[#060510]">
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white/40 z-20 bg-background">
               <div className="w-8 h-8 border-2 border-[#516af6]/30 border-t-[#516af6] rounded-full animate-spin" />
               Loading chart...
             </div>

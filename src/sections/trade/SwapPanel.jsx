@@ -45,7 +45,7 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
   }, [activeToken, solPrice, solBalance]);
 
   return (
-    <div className={`w-full lg:w-[340px] flex-shrink-0 flex-col overflow-y-auto ${className}`}>
+    <div className={`w-full lg:w-[340px] border-l border-t overflow-hidden rounded-l-xl border-white/5 flex-shrink-0 flex-col overflow-y-auto ${className}`}>
       <SwapForm
         activeToken={activeToken}
         loading={loading}

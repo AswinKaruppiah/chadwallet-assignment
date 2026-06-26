@@ -89,7 +89,7 @@ export default function TradeDashboard() {
   return (
     <div className="h-screen w-full flex flex-col overflow-hidden font-sans">
       {/* Top Navbar */}
-      <div className="px-4 border-b border-white/5">
+      <div className="px-4">
         <TopBar />
       </div>
 
@@ -98,8 +98,8 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("trending")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "trending"
-              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
-              : "text-white/40 hover:text-white/60"
+            ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
+            : "text-white/40 hover:text-white/60"
             }`}
         >
           Trending
@@ -107,8 +107,8 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("chart")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "chart"
-              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
-              : "text-white/40 hover:text-white/60"
+            ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
+            : "text-white/40 hover:text-white/60"
             }`}
         >
           Chart
@@ -116,8 +116,8 @@ export default function TradeDashboard() {
         <button
           onClick={() => setMobileTab("swap")}
           className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${mobileTab === "swap"
-              ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
-              : "text-white/40 hover:text-white/60"
+            ? "bg-[#516af6]/10 text-[#516af6] ring-1 ring-[#516af6]/20"
+            : "text-white/40 hover:text-white/60"
             }`}
         >
           Swap
@@ -125,7 +125,7 @@ export default function TradeDashboard() {
       </div>
 
       {/* Main Grid Layout */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
+      <div className="flex-1 flex flex-col gap-3 lg:flex-row overflow-y-auto lg:overflow-hidden">
         {/* LEFT: Trending Tokens */}
         <TrendingPanel
           tokens={tokens}

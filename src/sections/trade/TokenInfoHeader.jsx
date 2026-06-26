@@ -19,7 +19,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
   return (
     <Show>
       <Show.If isTrue={loading || !activeToken}>
-        <div className="px-4 py-2 border-b border-white/5 bg-white/5 backdrop-blur-md z-10 flex items-center justify-between gap-3 animate-pulse">
+        <div className="px-4 py-2 z-10 flex items-center justify-between gap-3 animate-pulse">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-full bg-white/10" />
             <div className="h-4 w-16 bg-white/10 rounded" />
@@ -34,7 +34,7 @@ export default function TokenInfoHeader({ activeToken, loading }) {
         </div>
       </Show.If>
       <Show.Else >
-        <div className="px-4 py-2 border-b border-white/5 bg-white/5 backdrop-blur-md z-10 flex items-center justify-between gap-3">
+        <div className="px-4 py-2 z-10 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="relative w-7 h-7 rounded-full overflow-hidden bg-white/[0.06] shrink-0 flex items-center justify-center ring-1 ring-white/[0.08]">
               <Show>
