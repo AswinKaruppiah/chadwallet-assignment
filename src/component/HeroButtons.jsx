@@ -111,11 +111,11 @@ export default function HeroButtons() {
         <AnimatePresence>
           {showDownloadDropdown && (
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
+              exit={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-[85vw] sm:w-72 max-w-sm z-50 transform-gpu"
+              className="absolute left-1/2 top-full pt-3 w-[85vw] sm:w-72 max-w-sm z-50 transform-gpu"
             >
               <div className="bg-[#060510]/60 border border-white/5 backdrop-blur-sm rounded-2xl p-4 shadow-2xl overflow-hidden flex flex-col gap-3 transform-gpu">
                 <div className="text-brand-secondary text-[10px] font-bold uppercase tracking-wider px-1">
