@@ -20,7 +20,7 @@ export default function DownloadSection() {
       <div className="w-full px-4 sm:px-8 sm:w-[80vw]">
         <div className="flex flex-col justify-center items-center py-24 sm:py-0 aspect-auto sm:aspect-square relative">
           <div className="relative z-10 flex flex-col items-center text-center px-4">
-            <h2 className="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-5">
+            <h2 className="text-4xl md:text-6xl font-medium tracking-tighter text-white mb-5">
               a trading app <br /> for the rest of us
             </h2>
             <p className="text-lg md:text-xl font-medium -tracking-tight  text-[#9899a3] mb-4">

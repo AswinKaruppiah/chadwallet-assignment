@@ -54,7 +54,7 @@ export default function FeaturesSection() {
       className="relative flex flex-col justify-center !px-3 sm:!px-20 section-block"
     >
       {/* Header */}
-      <div className="mb-10 md:mb-16 text-left">
+      <div className="mb-8 md:mb-16 text-left">
         <h2 className="text-4xl md:text-6xl font-medium tracking-tighter lowercase">
           never miss out again
         </h2>

@@ -11,7 +11,7 @@ export default function VideoSection() {
         </p>
 
         {/* Heading */}
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium text-center mb-4 leading-[1.1]">
+        <h2 className="text-4xl md:text-6xl font-medium text-center mb-4 leading-[1.1]">
           trade from anywhere.<br />
           never lose a beat.
         </h2>
