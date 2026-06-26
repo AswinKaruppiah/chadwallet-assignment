@@ -9,13 +9,13 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto pt-4">
         <TokenBanner direction="left" />
       </div>
       <VideoSection />
       <FeaturesSection />
       <DownloadSection />
-      <div className="max-w-7xl mx-auto mb-6">
+      <div className="max-w-7xl mx-auto my-4">
         <TokenBanner direction="right" />
       </div>
       <Footer />

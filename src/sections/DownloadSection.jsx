@@ -1,74 +1,49 @@
-import Image from "next/image";
-import Link from "next/link";
-import { AppleIcon, GooglePlayIcon } from "@/utility/icons";
+import HeroButtons from "@/component/HeroButtons";
 
 export default function DownloadSection() {
   return (
-    <section className="section-block !pb-14 !max-w-7xl mx-auto">
-      {/* Outer Banner Card */}
-      <div className="relative overflow-hidden rounded-[32px] bg-black py-16 md:py-28 px-3 sm:px-6 flex flex-col items-center justify-center text-center">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden w-full">
 
-        {/* Dot pattern background */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
+      {/* Legends Background */}
+      <img
+        src="/assets/legends.webp"
+        alt="Legends"
+        fill
+        className="absolute inset-0 w-full h-full bottom-0 object-cover"
+        priority
+      />
+      {/* Top and Bottom Fades */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Inner shadow overlay */}
-        <div className="absolute inset-0 pointer-events-none rounded-[32px] shadow-[inset_0_0_80px_rgba(255,255,255,0.15),inset_0_4px_40px_rgba(255,255,255,0.08)]" />
+      {/* Content */}
+      <div className="px-8 w-[80vw]">
+        <div className="flex flex-col justify-center items-center aspect-square relative">
+          <div className="relative z-10 flex flex-col items-center text-center px-4">
+            <h2 className="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-4">
+              a trading app <br /> for the rest of us
+            </h2>
+            <p className="text-lg md:text-xl font-medium -tracking-tight  text-[#9899a3] mb-10">
+              join 500,000 traders making their name on chadwallet
+            </p>
 
-        {/* Subtle center glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_70%)] pointer-events-none" />
-
-        {/* Brand App Icon Container */}
-        <div className="relative z-10 mb-6 md:mb-10">
-          <Image
-            src="/assets/logo/light.png"
-            alt="ChadWallet Logo"
-            width={68}
-            height={68}
-            className="object-contain rounded-full"
+            <HeroButtons />
+          </div>
+          {/* Outer Circle */}
+          <img
+            src="/assets/outer-circle.webp"
+            alt="Outer Circle"
+            fill
+            className="absolute inset-0 m-auto z-1 w-screen desktop:w-[55vw] animate-[spin_45s_linear_infinite] desktop:max-w-275"
           />
-        </div>
 
-        {/* Card Title */}
-        <h2 className="relative z-10 text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-4 md:mb-6">
-          Download ChadWallet
-        </h2>
-
-        {/* Overview */}
-        <p className="relative z-10 max-w-xl mb-8 md:mb-10 text-white/60 text-xs md:text-sm leading-relaxed">
-          Trade meme coins faster with real-time insights, trending token discovery, and powerful analytics all in one place.
-          Enjoy secure deposits, instant withdrawals, and complete control of your crypto from day one.
-        </p>
-
-        {/* Buttons / Badges Container */}
-        <div className="relative z-10 flex flex-wrap items-center justify-center gap-4">
-
-          {/* iOS Button */}
-          <Link
-            href="https://apps.apple.com/us/app/chadwallet/id6757367474"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/5 hover:backdrop-blur-xl border border-white/10 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-md"
-          >
-            <AppleIcon size={18} />
-            <span>iOS</span>
-          </Link>
-
-          {/* Android Button */}
-          <Link
-            href="https://play.google.com/store/apps/details?id=xyz.chadwallet.www"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/5 hover:backdrop-blur-xl border border-white/10 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-md"
-          >
-            <GooglePlayIcon size={16} />
-            <span>Android</span>
-          </Link>
+          {/* Inner Circle */}
+          <img
+            src="/assets/inner-circle.webp"
+            alt="Inner Circle"
+            fill
+            className="absolute inset-0 m-auto z-1 w-[35vw] desktop:w-[30vw] animate-[spin_30s_linear_infinite_reverse]"
+          />
         </div>
       </div>
     </section>
