@@ -23,7 +23,7 @@ export default function HeroButtons() {
   }, []);
 
   return (
-    <div className="flex flex-row items-center justify-center gap-4 mt-6 z-30 relative select-none">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 z-30 relative select-none w-full sm:w-auto">
       {/* Start Trading Button */}
       <Link
         href="/trade"
@@ -66,7 +66,7 @@ export default function HeroButtons() {
 
       {/* Download App Button with Dropdown */}
       <div
-        className="relative"
+        className="relative w-full sm:w-auto"
         ref={dropdownRef}
         onMouseEnter={() => {
           if (window.matchMedia('(pointer: coarse)').matches) return;
@@ -79,7 +79,7 @@ export default function HeroButtons() {
       >
         <button
           onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
-          className="relative h-14 px-8 w-[200px] flex items-center justify-center rounded-xl text-base sm:text-lg font-bold text-white bg-white/10 border border-white/10 hover:bg-white/20 backdrop-blur-md transition-all active:scale-[0.98] duration-150 cursor-pointer overflow-hidden"
+          className="relative h-14 px-8 w-[200px] mx-auto flex items-center justify-center rounded-xl text-base sm:text-lg font-bold text-white bg-white/10 border border-white/10 hover:bg-white/20 backdrop-blur-md transition-all active:scale-[0.98] duration-150 cursor-pointer overflow-hidden"
         >
           <span className="flex items-center justify-center">
             <motion.span
@@ -115,7 +115,7 @@ export default function HeroButtons() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-72 z-50 transform-gpu"
+              className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-3 w-[85vw] sm:w-72 max-w-sm z-50 transform-gpu"
             >
               <div className="bg-[#060510]/60 border border-white/5 backdrop-blur-sm rounded-2xl p-4 shadow-2xl overflow-hidden flex flex-col gap-3 transform-gpu">
                 <div className="text-brand-secondary text-[10px] font-bold uppercase tracking-wider px-1">

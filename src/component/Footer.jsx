@@ -39,9 +39,9 @@ export default function Footer() {
         </div>
 
         {/* Right — Link Columns */}
-        <div className="flex gap-16">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16">
           {Object.entries(footerLinks).map(([section, links]) => (
-            <div key={section} className="flex flex-col gap-3 min-w-[100px]">
+            <div key={section} className="flex flex-col gap-1 md:gap-3 min-w-[100px]">
               <p className="text-sm tracking-tight text-white/35 font-mono font-light uppercase mb-1">
                 {section}
               </p>

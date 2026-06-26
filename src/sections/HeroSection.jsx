@@ -1,5 +1,4 @@
 import TopBar from "@/component/TopBar";
-import StoreBadges from "@/component/StoreBadges";
 import HeroButtons from "@/component/HeroButtons";
 
 export default function HeroSection() {
@@ -21,27 +20,25 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center items-center pt-12 px-6 text-center gap-2" >
-        <h1 className="text-6xl sm:text-7xl md:text-[9rem] mb-3 font-extrabold text-brand-secondary tracking-tighter">
+        <h1 className="text-7xl md:text-[9rem] mb-3 font-extrabold text-brand-secondary tracking-tighter">
           Chadwallet
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-[#eaedff] lowercase">
+        <p className="text-xl sm:text-3xl md:text-4xl font-medium tracking-tighter text-[#eaedff] lowercase">
           the #1 memecoin trading app.
         </p>
-        <p className="text-xl text-[#D1D8FF99] font-medium lowercase max-w-xl mx-auto">
+        <p className="text-base sm:text-xl text-[#D1D8FF99] font-medium lowercase max-w-xl mx-auto">
           social trading, instant swaps, and smart analytics. join the thousands of traders who profit consistently.
         </p>
-
         <HeroButtons />
-        <div>
-          <StoreBadges className="flex md:hidden mt-8 gap-3" />
-        </div>
       </div >
-      <img
-        alt="Astronaut"
-        className="hidden desktop:block h-[520px] -mt-20 object-contain animate-[float_4s_ease-in-out_infinite]"
-        fetchPriority="high"
-        src="/hero/astronaut.webp"
-      />
+      <div className="w-[150%] -ml-[25%] sm:w-full sm:ml-0 flex justify-center -mt-20 sm:-mt-10 desktop:-mt-20 pointer-events-none">
+        <img
+          alt="Astronaut"
+          className="block w-full h-[420px] desktop:h-[520px] object-contain animate-[float_4s_ease-in-out_infinite]"
+          fetchPriority="high"
+          src="/hero/astronaut.webp"
+        />
+      </div>
     </section >
   );
 }

@@ -2,7 +2,7 @@ export default function VideoSection() {
   return (
     <section
       id="video"
-      className="relative flex flex-col items-center !pb-0 justify-center section-block"
+      className="relative flex flex-col items-center !pb-0 overflow-hidden justify-center section-block"
     >
       <div className="flex flex-col items-center justify-center w-full">
         {/* Section Label */}
@@ -22,7 +22,7 @@ export default function VideoSection() {
         </p>
 
         {/* Desktop & Mobile Mockup Container */}
-        <div className="relative w-full max-w-6xl mx-auto -mt-28 flex flex-col items-center select-none">
+        <div className="relative w-full max-w-6xl mx-auto -mt-8 sm:-mt-28 flex flex-col items-center select-none">
           {/* Desktop Monitor Image */}
           <div className="relative z-10 w-[92%] md:w-[94%]">
             <img

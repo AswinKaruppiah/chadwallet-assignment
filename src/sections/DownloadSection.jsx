@@ -17,8 +17,8 @@ export default function DownloadSection() {
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
       {/* Content */}
-      <div className="px-8 w-[80vw]">
-        <div className="flex flex-col justify-center items-center aspect-square relative">
+      <div className="w-full px-4 sm:px-8 sm:w-[80vw]">
+        <div className="flex flex-col justify-center items-center py-24 sm:py-0 aspect-auto sm:aspect-square relative">
           <div className="relative z-10 flex flex-col items-center text-center px-4">
             <h2 className="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-5">
               a trading app <br /> for the rest of us

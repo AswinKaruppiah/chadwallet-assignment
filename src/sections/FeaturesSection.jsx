@@ -30,7 +30,7 @@ export default function FeaturesSection() {
       imagePath: "/assets/flow/apple-pay-static.webp",
       alt: "Apple Pay Flow",
       cardClassName: "",
-      imageClassName: "!object-center",
+      imageClassName: "max-md:pb-8 md:!object-center",
     },
     {
       category: "Assets",
@@ -51,7 +51,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative flex flex-col justify-center !px-20 section-block"
+      className="relative flex flex-col justify-center !px-3 sm:!px-20 section-block"
     >
       {/* Header */}
       <div className="mb-10 md:mb-16 text-left">
@@ -72,7 +72,7 @@ export default function FeaturesSection() {
           >
             {/* Card Text */}
             <div className="p-6 md:p-8 pb-4">
-              <span className="font-mono font-bold tracking-[0.2em] text-brand uppercase">
+              <span className="font-mono font-bold tracking-wide text-brand uppercase">
                 {feature.category}
               </span>
               <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-white lowercase mt-3 leading-snug">
@@ -81,7 +81,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Image fills remaining space */}
-            <div className="min-h-0 flex-1 -mt-16">
+            <div className="min-h-0 flex-1 md:-mt-8 lg:-mt-16">
               <img
                 src={feature.imagePath}
                 alt={feature.alt}

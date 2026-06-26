@@ -13,7 +13,7 @@ export default function TrendingPanel({
   className = "",
 }) {
   return (
-    <div className={`w-full lg:w-[320px] flex-shrink-0 border-r overflow-hidden border-t rounded-r-xl  border-white/5 flex-col ${className}`}>
+    <div className={`w-full lg:w-[320px] flex-shrink-0 lg:border-r overflow-hidden lg:border-t lg:rounded-r-xl lg:border-white/5 flex-col ${className}`}>
       <div className="px-4 py-2.5 border-b border-white/5 flex bg-white/5 items-center justify-between">
         <h2 className="font-semibold text-[15px] tracking-tight flex items-center gap-2">
           Trending
