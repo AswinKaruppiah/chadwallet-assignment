@@ -37,6 +37,7 @@ const aeonik = localFont({
     },
   ],
   variable: "--font-aeonik",
+  display: "block",
 });
 
 export const metadata = {
