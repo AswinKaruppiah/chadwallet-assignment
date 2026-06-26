@@ -59,6 +59,13 @@ export default function Footer() {
         </div>
 
       </div>
+
+      {/* Massive Company Name */}
+      <div className="w-full flex justify-center items-end overflow-hidden">
+        <span className="text-[17vw] font-bold leading-[0.75] tracking-tighter bg-gradient-to-b from-brand-secondary to-brand/10 bg-clip-text text-transparent select-none whitespace-nowrap">
+          ChadWallet
+        </span>
+      </div>
     </footer>
   );
 }
