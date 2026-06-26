@@ -2,7 +2,7 @@ export default function VideoSection() {
   return (
     <section
       id="video"
-      className="relative flex flex-col items-center justify-center section-block"
+      className="relative flex flex-col items-center !pb-0 justify-center section-block"
     >
       <div className="flex flex-col items-center justify-center w-full">
         {/* Section Label */}
