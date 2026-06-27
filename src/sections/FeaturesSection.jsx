@@ -71,7 +71,7 @@ export default function FeaturesSection() {
             className={`group flex flex-col bg-subtle border border-white/[0.06] rounded-3xl overflow-hidden ${feature.cardClassName}`}
           >
             {/* Card Text */}
-            <div className="p-6 md:p-8 pb-4">
+            <div className="p-6 md:p-8 pb-4 z-[2]">
               <span className="font-mono font-bold tracking-wide text-brand uppercase">
                 {feature.category}
               </span>
@@ -81,7 +81,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Image fills remaining space */}
-            <div className="min-h-0 flex-1 md:-mt-8 lg:-mt-16">
+            <div className="min-h-0 flex-1 md:-mt-8 lg:-mt-16 -z[1]">
               <img
                 src={feature.imagePath}
                 alt={feature.alt}
