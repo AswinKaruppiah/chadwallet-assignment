@@ -47,6 +47,12 @@ export const metadata = {
   authors: [{ name: "ChadWallet Team" }],
   creator: "ChadWallet",
   publisher: "ChadWallet",
+  alternates: {
+    canonical: "https://chadwallet-assignment.vercel.app",
+  },
+  verification: {
+    google: "googlede6aed8de0320736",
+  },
   robots: {
     index: true,
     follow: true,
@@ -80,9 +86,29 @@ export const metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ChadWallet",
+  "operatingSystem": "Web",
+  "applicationCategory": "FinanceApplication",
+  "description": "Social trading, instant swaps, advanced analytics, and secure non-custodial ownership on Solana.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${aeonik.variable} antialiased`}
       >
