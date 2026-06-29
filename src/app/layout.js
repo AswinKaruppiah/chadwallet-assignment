@@ -80,7 +80,10 @@ export const metadata = {
     images: ["https://chadwallet-assignment.vercel.app/assets/logo/light.png?v=1"],
   },
   icons: {
-    icon: "/favicon.ico?v=1",
+    icon: [
+      { url: "/favicon.ico?v=1" },
+      { url: "/assets/logo/light.png?v=1", sizes: "512x512", type: "image/png" },
+    ],
     shortcut: "/favicon.ico?v=1",
     apple: "/assets/logo/light.png?v=1",
   },
