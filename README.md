@@ -1,5 +1,10 @@
 # ChadWallet - Solana Meme Trading Interface
 
+> [!NOTE]
+> This project is a front-end engineering assignment built as a high-fidelity clone of [fomo.family](https://fomo.family/).
+> 
+> Live Demo: [https://chadwallet-assignment.vercel.app/](https://chadwallet-assignment.vercel.app/)
+
 ChadWallet is a high-fidelity web interface built with Next.js and React for tracking and trading Solana meme tokens. This repository has been updated with real-time market data integration from the Birdeye API and interactive chart controls.
 
 ## Key Features & Implementations

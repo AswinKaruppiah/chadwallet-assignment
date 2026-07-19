@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import useSolPrice from "@/hooks/useSolPrice";
 import SwapForm from "./SwapForm";
-import UserPositions from "./UserPositions";
 
 const SOL_LOGO = "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png";
 
@@ -54,10 +53,10 @@ export default function SwapPanel({ activeToken, loading, className = "" }) {
         solPriceError={solPriceError}
         solBalance={solBalance}
       />
-      <UserPositions
+      {/* <UserPositions
         positions={positions}
         activeToken={activeToken}
-      />
+      /> */}
     </div>
   );
 }
