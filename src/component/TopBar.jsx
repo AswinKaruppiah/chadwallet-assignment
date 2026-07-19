@@ -67,7 +67,7 @@ export default function TopBar() {
     user?.apple?.email?.split('@')[0] ||
     "Trader";
   const email = user?.email?.address || user?.google?.email || user?.apple?.email || "";
-  const walletAddress = user?.wallets?.find(w => w.chainType === 'solana')?.address || user?.wallet?.address;
+  const walletAddress = user?.wallet?.address;
 
   return (
     <div
