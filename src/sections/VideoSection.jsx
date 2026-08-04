@@ -57,7 +57,7 @@ export default function VideoSection() {
         {/* Desktop & Mobile Mockup Container (Hidden on mobile) */}
         <div className="hidden sm:flex relative w-full max-w-6xl mx-auto -mt-8 sm:-mt-28 flex-col items-center select-none">
           {/* Desktop Monitor Image */}
-          <div className="relative z-10 w-[92%] md:w-[94%]">
+          <div className="relative z-10 aspect-square w-[92%] md:w-[94%]">
             <img
               src="/assets/chadwallet-desktop.webp"
               alt="ChadWallet Desktop Platform"
